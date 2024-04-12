@@ -297,5 +297,5 @@ MonoBehaviour:
   currentAnimationState: 0
   AnimationSpeed: 40
   delayBetweenLoop: 0
-  StartOnAwake: 0
+  StartOnAwake: 1
   DestroyOnCompletion: 0

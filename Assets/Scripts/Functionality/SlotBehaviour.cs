@@ -364,7 +364,7 @@ public class SlotBehaviour : MonoBehaviour
                 myImg = Instantiate(Bonus_Prefab, Slot_Transform[number]);
                 images[number].slotImages.Add(myImg.GetComponent<Image>());
                 images[number].slotImages[i].sprite = myImages[values[i]];
-                PopulateAnimationSprites(images[number].slotImages[i].GetComponent<ImageAnimation>(), values[i]);
+                //PopulateAnimationSprites(images[number].slotImages[i].GetComponent<ImageAnimation>(), values[i]);
             }
             else {
                 myImg = Instantiate(Image_Prefab, Slot_Transform[number]);

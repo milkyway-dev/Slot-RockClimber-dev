@@ -62,6 +62,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Paytable Popup")]
     [SerializeField]
+    private Button Info_button;
+    [SerializeField]
     private GameObject PaytablePopup_Object;
     [SerializeField]
     private Button PaytableExit_Button;
@@ -96,31 +98,31 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        if (Home_button) Home_button.onClick.RemoveAllListeners();
-        if (Home_button) Home_button.onClick.AddListener(ReturnToHome);
-        if (Menu_Button) Menu_Button.onClick.RemoveAllListeners();
-        if (Menu_Button) Menu_Button.onClick.AddListener(OpenMenu);
+        //if (Home_button) Home_button.onClick.RemoveAllListeners();
+        //if (Home_button) Home_button.onClick.AddListener(ReturnToHome);
+        //if (Menu_Button) Menu_Button.onClick.RemoveAllListeners();
+        //if (Menu_Button) Menu_Button.onClick.AddListener(OpenMenu);
 
-        if (Exit_Button) Exit_Button.onClick.RemoveAllListeners();
-        if (Exit_Button) Exit_Button.onClick.AddListener(CloseMenu);
+        //if (Exit_Button) Exit_Button.onClick.RemoveAllListeners();
+        //if (Exit_Button) Exit_Button.onClick.AddListener(CloseMenu);
 
-        if (About_Button) About_Button.onClick.RemoveAllListeners();
-        if (About_Button) About_Button.onClick.AddListener(delegate { OpenPopup(AboutPopup_Object); });
+        //if (About_Button) About_Button.onClick.RemoveAllListeners();
+        //if (About_Button) About_Button.onClick.AddListener(delegate { OpenPopup(AboutPopup_Object); });
 
-        if (AboutExit_Button) AboutExit_Button.onClick.RemoveAllListeners();
-        if (AboutExit_Button) AboutExit_Button.onClick.AddListener(delegate { ClosePopup(AboutPopup_Object); });
+        //if (AboutExit_Button) AboutExit_Button.onClick.RemoveAllListeners();
+        //if (AboutExit_Button) AboutExit_Button.onClick.AddListener(delegate { ClosePopup(AboutPopup_Object); });
 
-        if (Paytable_Button) Paytable_Button.onClick.RemoveAllListeners();
-        if (Paytable_Button) Paytable_Button.onClick.AddListener(delegate { OpenPopup(PaytablePopup_Object); });
+        if (Info_button) Info_button.onClick.RemoveAllListeners();
+        if (Info_button) Info_button.onClick.AddListener(delegate { OpenPopup(PaytablePopup_Object); });
 
         if (PaytableExit_Button) PaytableExit_Button.onClick.RemoveAllListeners();
         if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(delegate { ClosePopup(PaytablePopup_Object); });
 
-        if (Settings_Button) Settings_Button.onClick.RemoveAllListeners();
-        if (Settings_Button) Settings_Button.onClick.AddListener(delegate { OpenPopup(SettingsPopup_Object); });
+        //if (Settings_Button) Settings_Button.onClick.RemoveAllListeners();
+        //if (Settings_Button) Settings_Button.onClick.AddListener(delegate { OpenPopup(SettingsPopup_Object); });
 
-        if (SettingsExit_Button) SettingsExit_Button.onClick.RemoveAllListeners();
-        if (SettingsExit_Button) SettingsExit_Button.onClick.AddListener(delegate { ClosePopup(SettingsPopup_Object); });
+        //if (SettingsExit_Button) SettingsExit_Button.onClick.RemoveAllListeners();
+        //if (SettingsExit_Button) SettingsExit_Button.onClick.AddListener(delegate { ClosePopup(SettingsPopup_Object); });
 
         if (MusicOn_Object) MusicOn_Object.SetActive(true);
         if (MusicOff_Object) MusicOff_Object.SetActive(false);
@@ -201,6 +203,7 @@ public class UIManager : MonoBehaviour
 
     private void OpenPopup(GameObject Popup)
     {
+        Debug.Log("dsds");
         if (Popup) Popup.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
     }

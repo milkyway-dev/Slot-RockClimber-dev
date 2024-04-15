@@ -72,16 +72,15 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField]
     private Button MaxBet_Button;
     [SerializeField]
-    private Button BetPlus_Button;
-    [SerializeField]
-    private Button BetMinus_Button;
+    private Button Double_Button;
     [SerializeField]
     private Button Line_Button;
     [SerializeField]
     private List<GameObject> activeLineImage;
     [SerializeField]
     private List<GameObject> inactiveLineimage;
-
+    [SerializeField]
+    private List<int> DontDestroyLines = new List<int>();
     //[SerializeField]
     //private Button LinePlus_Button;
     //[SerializeField]
@@ -198,7 +197,7 @@ public class SlotBehaviour : MonoBehaviour
         while (true)
         {
             StartSlots(true);
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(5f);
         }
     }
 
@@ -212,10 +211,10 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     //Generate Static Lines from button hovers
-    internal void GenerateStaticLine(int index = -1)
+    internal void GenerateStaticLine(int index = -1, bool DestroyFirst=true)
     {
-
-        //DestroyStaticLine();
+        if(DestroyFirst)
+        DestroyStaticLine();
         if (index >= 0)
         {
             LineObjetcs[index - 1].SetActive(true);
@@ -238,6 +237,9 @@ public class SlotBehaviour : MonoBehaviour
 
         for (int i = 0; i < LineObjetcs.Count; i++)
         {
+            if (DontDestroyLines.IndexOf(i)>=0)
+                continue;
+            else
             LineObjetcs[i].SetActive(false);
         }
 
@@ -257,7 +259,7 @@ public class SlotBehaviour : MonoBehaviour
             LineIndex = 0;
 
         CurrentLines = LineList[LineIndex];
-
+        DontDestroyLines.Clear();
 
         if (Lines_text) Lines_text.text = CurrentLines.ToString();
         GenerateStaticLine();
@@ -410,6 +412,8 @@ public class SlotBehaviour : MonoBehaviour
         if (_audioSource) _audioSource.clip = _spinSound;
         if (_audioSource) _audioSource.loop = true;
         if (_audioSource) _audioSource.Play();
+        //if(DontDestroy.Count>0)
+        DontDestroyLines.Clear();
         DestroyStaticLine();
         if (!autoSpin)
         {
@@ -422,6 +426,11 @@ public class SlotBehaviour : MonoBehaviour
         }
 
         if (SlotStart_Button) SlotStart_Button.interactable = false;
+        if (AutoSpin_Button) AutoSpin_Button.interactable = false;
+        if (Line_Button) Line_Button.interactable = false;
+        if (Double_Button) Double_Button.interactable = false;
+        if (MaxBet_Button) MaxBet_Button.interactable = false;
+
         if (TempList.Count > 0)
         {
             StopGameAnimation();
@@ -457,7 +466,12 @@ public class SlotBehaviour : MonoBehaviour
         GenerateMatrix(SocketManager.tempresult.StopList);
         CheckPayoutLineBackend(SocketManager.tempresult.resultLine, SocketManager.tempresult.x_animResult, SocketManager.tempresult.y_animResult);
         KillAllTweens();
+
         if (SlotStart_Button) SlotStart_Button.interactable = true;
+        if (AutoSpin_Button) AutoSpin_Button.interactable = true;
+        if (Line_Button) Line_Button.interactable = true;
+        if (Double_Button) Double_Button.interactable = true;
+        if (MaxBet_Button) MaxBet_Button.interactable = true;
     }
 
     //start the icons animation
@@ -507,8 +521,9 @@ public class SlotBehaviour : MonoBehaviour
 
             for (int i = 0; i < LineId.Count; i++)
             {
+                DontDestroyLines.Add(LineId[i]-1);
 
-                GenerateStaticLine(LineId[i]);
+                GenerateStaticLine(LineId[i],false);
 
                 //x_points = x_string[LineId[i]]?.Split(',')?.Select(Int32.Parse)?.ToList();
                 //y_points = y_string[LineId[i]]?.Split(',')?.Select(Int32.Parse)?.ToList();

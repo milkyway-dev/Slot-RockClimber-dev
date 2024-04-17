@@ -72,8 +72,6 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField]
     private Button MaxBet_Button;
     [SerializeField]
-    private Button Double_Button;
-    [SerializeField]
     private Button Line_Button;
     [SerializeField]
     private List<GameObject> activeLineImage;
@@ -81,12 +79,13 @@ public class SlotBehaviour : MonoBehaviour
     private List<GameObject> inactiveLineimage;
     [SerializeField]
     private List<int> DontDestroyLines = new List<int>();
-    //[SerializeField]
-    //private Button LinePlus_Button;
-    //[SerializeField]
-    //private Button LineMinus_Button;
+    [SerializeField] private Button BetOne_button;
+    [SerializeField] private Button Double_button;
+    [SerializeField] private Button ChangeBet_button;
+
 
     [Header("Audio Management")]
+    [SerializeField] private AudioController audioController;
     [SerializeField]
     private AudioSource _audioSource;
     [SerializeField]
@@ -147,22 +146,21 @@ public class SlotBehaviour : MonoBehaviour
         if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
         if (SlotStart_Button) SlotStart_Button.onClick.AddListener(delegate { StartSlots(); });
 
-        //if (BetPlus_Button) BetPlus_Button.onClick.RemoveAllListeners();
-        //if (BetPlus_Button) BetPlus_Button.onClick.AddListener(delegate { ChangeBet(true); });
-        //if (BetMinus_Button) BetMinus_Button.onClick.RemoveAllListeners();
-        //if (BetMinus_Button) BetMinus_Button.onClick.AddListener(delegate { ChangeBet(false); });
-
-        //if (LinePlus_Button) LinePlus_Button.onClick.RemoveAllListeners();
-        //if (LinePlus_Button) LinePlus_Button.onClick.AddListener(delegate { ChangeLine(true); });
-        //if (LineMinus_Button) LineMinus_Button.onClick.RemoveAllListeners();
-        //if (LineMinus_Button) LineMinus_Button.onClick.AddListener(delegate { ChangeLine(false); });
-
         if (Line_Button) Line_Button.onClick.RemoveAllListeners();
         if (Line_Button) Line_Button.onClick.AddListener(delegate { ChangeLine(); });
+
+        if (ChangeBet_button) ChangeBet_button.onClick.RemoveAllListeners();
+        if (ChangeBet_button) ChangeBet_button.onClick.AddListener(delegate { ChangeBet(true); });
 
 
         if (MaxBet_Button) MaxBet_Button.onClick.RemoveAllListeners();
         if (MaxBet_Button) MaxBet_Button.onClick.AddListener(MaxBet);
+
+        if (BetOne_button) BetOne_button.onClick.RemoveAllListeners();
+        if (BetOne_button) BetOne_button.onClick.AddListener(OnBetOne);
+
+        if (Double_button) Double_button.onClick.RemoveAllListeners();
+        if (Double_button) Double_button.onClick.AddListener(OnDouble);
 
         if (AutoSpin_Button) AutoSpin_Button.onClick.RemoveAllListeners();
         if (AutoSpin_Button) AutoSpin_Button.onClick.AddListener(AutoSpin);
@@ -247,12 +245,14 @@ public class SlotBehaviour : MonoBehaviour
 
     private void MaxBet()
     {
+        if (audioController) audioController.PlayButtonAudio();
         if (TotalBet_text) TotalBet_text.text = "99999";
     }
 
 
     private void ChangeLine()
     {
+        if (audioController) audioController.PlayButtonAudio();
         LineIndex++;
 
         if (LineIndex >= LineList.Count)
@@ -283,9 +283,24 @@ public class SlotBehaviour : MonoBehaviour
 
     }
 
+    void OnBetOne() {
+
+        if (audioController) audioController.PlayButtonAudio();
+
+
+    }
+
+    void OnDouble() {
+        if (audioController) audioController.PlayButtonAudio();
+
+
+    }
 
     private void ChangeBet(bool IncDec)
     {
+        if (audioController) audioController.PlayButtonAudio();
+
+        print("triggered");
         double currentbet = 0;
         try
         {
@@ -409,9 +424,11 @@ public class SlotBehaviour : MonoBehaviour
     //starts the spin process
     private void StartSlots(bool autoSpin = false)
     {
-        if (_audioSource) _audioSource.clip = _spinSound;
-        if (_audioSource) _audioSource.loop = true;
-        if (_audioSource) _audioSource.Play();
+        if(audioController) audioController.PlayWLAudio("spin");
+
+        //if (_audioSource) _audioSource.clip = _spinSound;
+        //if (_audioSource) _audioSource.loop = true;
+        //if (_audioSource) _audioSource.Play();
         //if(DontDestroy.Count>0)
         DontDestroyLines.Clear();
         DestroyStaticLine();
@@ -428,7 +445,7 @@ public class SlotBehaviour : MonoBehaviour
         if (SlotStart_Button) SlotStart_Button.interactable = false;
         if (AutoSpin_Button) AutoSpin_Button.interactable = false;
         if (Line_Button) Line_Button.interactable = false;
-        if (Double_Button) Double_Button.interactable = false;
+        if (Double_button) Double_button.interactable = false;
         if (MaxBet_Button) MaxBet_Button.interactable = false;
 
         if (TempList.Count > 0)
@@ -470,7 +487,7 @@ public class SlotBehaviour : MonoBehaviour
         if (SlotStart_Button) SlotStart_Button.interactable = true;
         if (AutoSpin_Button) AutoSpin_Button.interactable = true;
         if (Line_Button) Line_Button.interactable = true;
-        if (Double_Button) Double_Button.interactable = true;
+        if (Double_button) Double_button.interactable = true;
         if (MaxBet_Button) MaxBet_Button.interactable = true;
     }
 
@@ -513,11 +530,13 @@ public class SlotBehaviour : MonoBehaviour
         List<int> y_anim = null;
         if (LineId.Count > 0)
         {
-            int choice = UnityEngine.Random.Range(0, 2);
-            if (_audioSource) _audioSource.Stop();
-            if (_audioSource) _audioSource.loop = false;
-            if (_audioSource) _audioSource.clip = _winSounds[choice];
-            if (_audioSource) _audioSource.Play();
+            if (audioController) audioController.PlayWLAudio("win");
+
+            //int choice = UnityEngine.Random.Range(0, 2);
+            //if (_audioSource) _audioSource.Stop();
+            //if (_audioSource) _audioSource.loop = false;
+            //if (_audioSource) _audioSource.clip = _winSounds[choice];
+            //if (_audioSource) _audioSource.Play();
 
             for (int i = 0; i < LineId.Count; i++)
             {
@@ -543,10 +562,11 @@ public class SlotBehaviour : MonoBehaviour
         }
         else
         {
-            if (_audioSource) _audioSource.Stop();
-            if (_audioSource) _audioSource.loop = false;
-            if (_audioSource) _audioSource.clip = _lossSound;
-            if (_audioSource) _audioSource.Play();
+            if (audioController) audioController.PlayWLAudio("lose");
+            //if (_audioSource) _audioSource.Stop();
+            //if (_audioSource) _audioSource.loop = false;
+            //if (_audioSource) _audioSource.clip = _lossSound;
+            //if (_audioSource) _audioSource.Play();
         }
     }
 

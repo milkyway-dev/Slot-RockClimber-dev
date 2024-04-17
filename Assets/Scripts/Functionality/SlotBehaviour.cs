@@ -204,10 +204,10 @@ public class SlotBehaviour : MonoBehaviour
     //Fetch Lines from backend
     internal void FetchLines(string x_value, string y_value, int LineID, int count)
     {
-        x_string.Add(LineID, x_value);
-        y_string.Add(LineID, y_value);
-        StaticLine_Texts[count].text = LineID.ToString();
-        StaticLine_Objects[count].SetActive(true);
+        //x_string.Add(LineID, x_value);
+        //y_string.Add(LineID, y_value);
+        //StaticLine_Texts[count].text = LineID.ToString();
+        //StaticLine_Objects[count].SetActive(true);
     }
 
     //Generate Static Lines from button hovers

@@ -16,21 +16,29 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler,IPointerExi
 	private TMP_Text num_text;
 	[SerializeField]
 	private int num;
-    [SerializeField]
-    internal bool isActive=false;
+    private bool isActive=false;
     [SerializeField]
     private PayoutCalculation payoutManager;
 
+    private Button btn;
 
-	public void OnPointerEnter(PointerEventData eventData)
+    private void Start()
+    {
+        btn = this.GetComponent<Button>();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
 	{
 
-        if (num < slotManager.CurrentLines+1)
+        if (num < slotManager.CurrentLines + 1) {
             isActive = true;
+            btn.interactable = true;
+        }
+
         else {
 
             isActive = false;
-            this.GetComponent<Button>().interactable = false;
+            btn.interactable = false;
         }
 			//Debug.Log("run on pointer enter");
         if(isActive)

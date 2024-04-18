@@ -65,10 +65,10 @@ public class SocketIOManager : MonoBehaviour
             slotManager.LayoutReset(i);
         }
 
-        for (int i = 0; i < LineIds.Count; i++)
-        {
-            slotManager.FetchLines(x_val[i], y_val[i], LineIds[i], i);
-        }
+        //for (int i = 0; i < LineIds.Count; i++)
+        //{
+        //    slotManager.FetchLines(x_val[i], y_val[i], LineIds[i], i);
+        //}
 
     }
 

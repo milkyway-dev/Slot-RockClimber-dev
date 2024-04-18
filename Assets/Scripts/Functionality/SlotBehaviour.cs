@@ -381,7 +381,7 @@ public class SlotBehaviour : MonoBehaviour
                 myImg = Instantiate(Bonus_Prefab, Slot_Transform[number]);
                 images[number].slotImages.Add(myImg.GetComponent<Image>());
                 images[number].slotImages[i].sprite = myImages[values[i]];
-                //PopulateAnimationSprites(images[number].slotImages[i].GetComponent<ImageAnimation>(), values[i]);
+                PopulateAnimationSprites(images[number].slotImages[i].GetComponent<ImageAnimation>());
             }
             else {
                 myImg = Instantiate(Image_Prefab, Slot_Transform[number]);
@@ -398,7 +398,7 @@ public class SlotBehaviour : MonoBehaviour
                 GameObject mylastImg = Instantiate(Bonus_Prefab, Slot_Transform[number]);
                 images[number].slotImages.Add(mylastImg.GetComponent<Image>());
                 images[number].slotImages[images[number].slotImages.Count - 1].sprite = myImages[values[k]];
-                PopulateAnimationSprites(images[number].slotImages[images[number].slotImages.Count - 1].gameObject.GetComponent<ImageAnimation>(), values[k]);
+                PopulateAnimationSprites(images[number].slotImages[images[number].slotImages.Count - 1].gameObject.GetComponent<ImageAnimation>());
             }
             else {
 
@@ -413,7 +413,7 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     //function to populate animation sprites accordingly
-    private void PopulateAnimationSprites(ImageAnimation animScript, int val)
+    private void PopulateAnimationSprites(ImageAnimation animScript)
     {
             for (int i = 0; i < Bonus_Sprite.Length; i++)
             {
@@ -425,11 +425,6 @@ public class SlotBehaviour : MonoBehaviour
     private void StartSlots(bool autoSpin = false)
     {
         if(audioController) audioController.PlayWLAudio("spin");
-
-        //if (_audioSource) _audioSource.clip = _spinSound;
-        //if (_audioSource) _audioSource.loop = true;
-        //if (_audioSource) _audioSource.Play();
-        //if(DontDestroy.Count>0)
         DontDestroyLines.Clear();
         DestroyStaticLine();
         if (!autoSpin)
@@ -494,7 +489,6 @@ public class SlotBehaviour : MonoBehaviour
     //start the icons animation
     private void StartGameAnimation(GameObject animObjects)
     {
-        //ImageAnimation temp = animObjects.Gtec.GetComponent<ImageAnimation>();
         int a = animObjects.transform.childCount;
 
         if (a>0)
@@ -532,11 +526,7 @@ public class SlotBehaviour : MonoBehaviour
         {
             if (audioController) audioController.PlayWLAudio("win");
 
-            //int choice = UnityEngine.Random.Range(0, 2);
-            //if (_audioSource) _audioSource.Stop();
-            //if (_audioSource) _audioSource.loop = false;
-            //if (_audioSource) _audioSource.clip = _winSounds[choice];
-            //if (_audioSource) _audioSource.Play();
+
 
             for (int i = 0; i < LineId.Count; i++)
             {
@@ -544,9 +534,6 @@ public class SlotBehaviour : MonoBehaviour
 
                 GenerateStaticLine(LineId[i],false);
 
-                //x_points = x_string[LineId[i]]?.Split(',')?.Select(Int32.Parse)?.ToList();
-                //y_points = y_string[LineId[i]]?.Split(',')?.Select(Int32.Parse)?.ToList();
-                //PayCalculator.GeneratePayoutLinesBackend(x_points, y_points, x_points.Count);
             }
 
             for (int i = 0; i < x_AnimString.Count; i++)
@@ -563,10 +550,7 @@ public class SlotBehaviour : MonoBehaviour
         else
         {
             if (audioController) audioController.PlayWLAudio("lose");
-            //if (_audioSource) _audioSource.Stop();
-            //if (_audioSource) _audioSource.loop = false;
-            //if (_audioSource) _audioSource.clip = _lossSound;
-            //if (_audioSource) _audioSource.Play();
+
         }
     }
 

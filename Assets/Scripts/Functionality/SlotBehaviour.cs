@@ -136,11 +136,8 @@ public class SlotBehaviour : MonoBehaviour
 
     private void Start()
     {
-        CurrentLines = LineList[LineList.Count - 1];
-        LineIndex = LineList.Count - 1;
-        inactiveLineimage[LineIndex].SetActive(false);
-        activeLineImage[LineIndex].SetActive(true);
-        if (Lines_text) Lines_text.text = CurrentLines.ToString();
+
+        //if (Lines_text) Lines_text.text = CurrentLines.ToString();
 
         IsAutoSpin = false;
         if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
@@ -182,6 +179,12 @@ public class SlotBehaviour : MonoBehaviour
         else
         {
             if (AutoSpin_Image) AutoSpin_Image.sprite = AutoSpin_Sprite;
+            if (SlotStart_Button) SlotStart_Button.interactable = true;
+            if (Line_Button) Line_Button.interactable = true;
+            if (Double_button) Double_button.interactable = true;
+            if (MaxBet_Button) MaxBet_Button.interactable = true;
+            if (BetOne_button) BetOne_button.interactable = true;
+
             if (AutoSpinRoutine != null)
             {
                 StopCoroutine(AutoSpinRoutine);
@@ -209,39 +212,39 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     //Generate Static Lines from button hovers
-    internal void GenerateStaticLine(int index = -1, bool DestroyFirst=true)
-    {
-        if(DestroyFirst)
-        DestroyStaticLine();
-        if (index >= 0)
-        {
-            LineObjetcs[index - 1].SetActive(true);
-            print(LineObjetcs[index - 1].name);
-            return;
-        }
-        for (int i = 0; i < CurrentLines; i++)
-        {
-            LineObjetcs[i].SetActive(true);
+    //internal void GenerateStaticLine(int index = -1, bool DestroyFirst=true)
+    //{
+    //    if(DestroyFirst)
+    //    DestroyStaticLine();
+    //    if (index >= 0)
+    //    {
+    //        LineObjetcs[index - 1].SetActive(true);
+    //        print(LineObjetcs[index - 1].name);
+    //        return;
+    //    }
+    //    for (int i = 0; i < CurrentLines; i++)
+    //    {
+    //        LineObjetcs[i].SetActive(true);
 
 
-        }
+    //    }
 
 
-    }
+    //}
 
     //Destroy Static Lines from button hovers
-    internal void DestroyStaticLine()
-    {
+    //internal void DestroyStaticLine()
+    //{
 
-        for (int i = 0; i < LineObjetcs.Count; i++)
-        {
-            if (DontDestroyLines.IndexOf(i)>=0)
-                continue;
-            else
-            LineObjetcs[i].SetActive(false);
-        }
+    //    for (int i = 0; i < LineObjetcs.Count; i++)
+    //    {
+    //        if (DontDestroyLines.IndexOf(i)>=0)
+    //            continue;
+    //        else
+    //        LineObjetcs[i].SetActive(false);
+    //    }
 
-    }
+    //}
 
     private void MaxBet()
     {
@@ -258,20 +261,22 @@ public class SlotBehaviour : MonoBehaviour
         if (LineIndex >= LineList.Count)
             LineIndex = 0;
 
-        CurrentLines = LineList[LineIndex];
-        DontDestroyLines.Clear();
+        PayCalculator.CurrentLines = LineList[LineIndex];
+        
 
-        if (Lines_text) Lines_text.text = CurrentLines.ToString();
-        GenerateStaticLine();
+        //if (Lines_text) Lines_text.text = CurrentLines.ToString();
+        PayCalculator.GeneratePayoutLinesBackend();
+        //GenerateStaticLine();
 
-        for (int i = 0; i < LineList.Count; i++)
-        {
-            activeLineImage[i].SetActive(false);
-            inactiveLineimage[i].SetActive(true);
-        }
+        PayCalculator.ToggleLineOff();
+        //for (int i = 0; i < LineList.Count; i++)
+        //{
+        //    activeLineImage[i].SetActive(false);
+        //    inactiveLineimage[i].SetActive(true);
+        //}
 
-        int j = LineList.IndexOf(CurrentLines);
-        StartCoroutine(Set_button_state(activeLineImage[j], inactiveLineimage[j], 0.1f));
+        //int j = LineList.IndexOf(PayCalculator.CurrentLines);
+        //StartCoroutine(Set_button_state(activeLineImage[j], inactiveLineimage[j], 0.1f));
 
     }
 
@@ -426,7 +431,8 @@ public class SlotBehaviour : MonoBehaviour
     {
         if(audioController) audioController.PlayWLAudio("spin");
         DontDestroyLines.Clear();
-        DestroyStaticLine();
+        PayCalculator.ResetStaticLine();
+        //DestroyStaticLine();
         if (!autoSpin)
         {
             if (AutoSpin_Image) AutoSpin_Image.sprite = AutoSpin_Sprite;
@@ -437,11 +443,7 @@ public class SlotBehaviour : MonoBehaviour
             }
         }
 
-        if (SlotStart_Button) SlotStart_Button.interactable = false;
-        if (AutoSpin_Button) AutoSpin_Button.interactable = false;
-        if (Line_Button) Line_Button.interactable = false;
-        if (Double_button) Double_button.interactable = false;
-        if (MaxBet_Button) MaxBet_Button.interactable = false;
+
 
         if (TempList.Count > 0)
         {
@@ -459,6 +461,14 @@ public class SlotBehaviour : MonoBehaviour
     //manage the Routine for spinning of the slots
     private IEnumerator TweenRoutine()
     {
+        if (SlotStart_Button) SlotStart_Button.interactable = false;
+        if (AutoSpin_Button) AutoSpin_Button.interactable = false;
+        if (Line_Button) Line_Button.interactable = false;
+        if (Double_button) Double_button.interactable = false;
+        if (MaxBet_Button) MaxBet_Button.interactable = false;
+        if (BetOne_button) BetOne_button.interactable = false;
+        if (ChangeBet_button) ChangeBet_button.interactable = false;
+
         for (int i = 0; i < numberOfSlots; i++)
         {
             InitializeTweening(Slot_Transform[i]);
@@ -479,11 +489,16 @@ public class SlotBehaviour : MonoBehaviour
         CheckPayoutLineBackend(SocketManager.tempresult.resultLine, SocketManager.tempresult.x_animResult, SocketManager.tempresult.y_animResult);
         KillAllTweens();
 
-        if (SlotStart_Button) SlotStart_Button.interactable = true;
+        if (!IsAutoSpin) {
+            if (SlotStart_Button) SlotStart_Button.interactable = true;
+            if (Line_Button) Line_Button.interactable = true;
+            if (Double_button) Double_button.interactable = true;
+            if (MaxBet_Button) MaxBet_Button.interactable = true;
+            if (BetOne_button) BetOne_button.interactable = true;
+            if (ChangeBet_button) ChangeBet_button.interactable = true;
+        }
+
         if (AutoSpin_Button) AutoSpin_Button.interactable = true;
-        if (Line_Button) Line_Button.interactable = true;
-        if (Double_button) Double_button.interactable = true;
-        if (MaxBet_Button) MaxBet_Button.interactable = true;
     }
 
     //start the icons animation
@@ -526,13 +541,12 @@ public class SlotBehaviour : MonoBehaviour
         {
             if (audioController) audioController.PlayWLAudio("win");
 
-
-
             for (int i = 0; i < LineId.Count; i++)
             {
                 DontDestroyLines.Add(LineId[i]-1);
 
-                GenerateStaticLine(LineId[i],false);
+                PayCalculator.GeneratePayoutLinesBackend(LineId[i], false);
+                //GenerateStaticLine(LineId[i],false);
 
             }
 

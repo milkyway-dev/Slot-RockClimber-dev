@@ -30,7 +30,7 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler,IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
 	{
 
-        if (num < slotManager.CurrentLines + 1) {
+        if (num < payoutManager.CurrentLines + 1) {
             isActive = true;
             btn.interactable = true;
         }
@@ -40,16 +40,18 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler,IPointerExi
             isActive = false;
             btn.interactable = false;
         }
-			//Debug.Log("run on pointer enter");
-        if(isActive)
-        slotManager.GenerateStaticLine(num);
+        //Debug.Log("run on pointer enter");
+        if (isActive)
+        payoutManager.GeneratePayoutLinesBackend(num);
+        //slotManager.GenerateStaticLine(num);
 	}
 	public void OnPointerExit(PointerEventData eventData)
 	{
 
-		//Debug.Log("run on pointer exit");
+        //Debug.Log("run on pointer exit");
         if (isActive)
-        slotManager.DestroyStaticLine();
+        payoutManager.ResetStaticLine();
+        //slotManager.DestroyStaticLine();
 	}
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -57,7 +59,8 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler,IPointerExi
         {
             this.gameObject.GetComponent<Button>().Select();
             Debug.Log("run on pointer down");
-            slotManager.GenerateStaticLine(num);
+            payoutManager.GeneratePayoutLinesBackend(num);
+            //slotManager.GenerateStaticLine(num);
         }
     }
     public void OnPointerUp(PointerEventData eventData)
@@ -65,7 +68,8 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler,IPointerExi
         if (Application.platform == RuntimePlatform.WebGLPlayer && Application.isMobilePlatform)
         {
             Debug.Log("run on pointer up");
-            slotManager.DestroyStaticLine();
+            payoutManager.ResetStaticLine();
+            //slotManager.DestroyStaticLine();
             DOVirtual.DelayedCall(0.1f, () =>
             {
                 this.gameObject.GetComponent<Button>().spriteState = default;

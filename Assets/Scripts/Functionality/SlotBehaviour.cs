@@ -126,9 +126,6 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField]
     private List<GameObject> LineObjetcs;
 
-    internal int CurrentLines;
-    private int LineIndex;
-
 
     Coroutine AutoSpinRoutine = null;
     Coroutine tweenroutine;
@@ -138,7 +135,6 @@ public class SlotBehaviour : MonoBehaviour
     private void Start()
     {
 
-        //if (Lines_text) Lines_text.text = CurrentLines.ToString();
 
         IsAutoSpin = false;
         if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
@@ -235,40 +231,6 @@ public class SlotBehaviour : MonoBehaviour
         //StaticLine_Objects[count].SetActive(true);
     }
 
-    //Generate Static Lines from button hovers
-    //internal void GenerateStaticLine(int index = -1, bool DestroyFirst=true)
-    //{
-    //    if(DestroyFirst)
-    //    DestroyStaticLine();
-    //    if (index >= 0)
-    //    {
-    //        LineObjetcs[index - 1].SetActive(true);
-    //        print(LineObjetcs[index - 1].name);
-    //        return;
-    //    }
-    //    for (int i = 0; i < CurrentLines; i++)
-    //    {
-    //        LineObjetcs[i].SetActive(true);
-
-
-    //    }
-
-
-    //}
-
-    //Destroy Static Lines from button hovers
-    //internal void DestroyStaticLine()
-    //{
-
-    //    for (int i = 0; i < LineObjetcs.Count; i++)
-    //    {
-    //        if (DontDestroyLines.IndexOf(i)>=0)
-    //            continue;
-    //        else
-    //        LineObjetcs[i].SetActive(false);
-    //    }
-
-    //}
 
     private void MaxBet()
     {
@@ -280,37 +242,18 @@ public class SlotBehaviour : MonoBehaviour
     private void ChangeLine()
     {
         if (audioController) audioController.PlayButtonAudio();
-        LineIndex++;
+        PayCalculator.LineIndex++;
 
-        if (LineIndex >= LineList.Count)
-            LineIndex = 0;
+        if (PayCalculator.LineIndex >= PayCalculator.LineList.Count)
+            PayCalculator.LineIndex = 0;
 
-        PayCalculator.CurrentLines = LineList[LineIndex];
-        
-
-        //if (Lines_text) Lines_text.text = CurrentLines.ToString();
         PayCalculator.GeneratePayoutLinesBackend();
-        //GenerateStaticLine();
-
         PayCalculator.ToggleLineOff();
-        //for (int i = 0; i < LineList.Count; i++)
-        //{
-        //    activeLineImage[i].SetActive(false);
-        //    inactiveLineimage[i].SetActive(true);
-        //}
 
-        //int j = LineList.IndexOf(PayCalculator.CurrentLines);
-        //StartCoroutine(Set_button_state(activeLineImage[j], inactiveLineimage[j], 0.1f));
 
     }
 
-    IEnumerator Set_button_state(GameObject button_to_active, GameObject button_to_inactive, float time)
-    {
-        button_to_inactive.SetActive(false);
-        yield return new WaitForSeconds(time);
-        button_to_active.SetActive(true);
 
-    }
 
     void OnBetOne() {
 

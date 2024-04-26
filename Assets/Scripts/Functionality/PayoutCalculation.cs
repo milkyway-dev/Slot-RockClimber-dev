@@ -18,12 +18,12 @@ public class PayoutCalculation : MonoBehaviour
     [SerializeField]
     private Vector2 InitialLinePosition = new Vector2(-315, 100);
 
-    [SerializeField] private List<int> LineList;
+    [SerializeField] internal List<int> LineList;
     [SerializeField] private List<GameObject> LineObjetcs;
     [SerializeField] internal List<int> DontDestroyLines = new List<int>();
 
     internal int CurrentLines;
-    private int LineIndex;
+    internal int LineIndex;
 
     GameObject TempObj = null;
 
@@ -63,6 +63,7 @@ public class PayoutCalculation : MonoBehaviour
 
     internal void ToggleLineOff() {
 
+        CurrentLines = LineList[LineIndex];
         for (int j = 0; j < LineList.Count; j++)
         {
             activeLineButtons[j].SetActive(false);

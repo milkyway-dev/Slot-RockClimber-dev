@@ -20,7 +20,7 @@ public class PayoutCalculation : MonoBehaviour
 
     [SerializeField] private List<int> LineList;
     [SerializeField] private List<GameObject> LineObjetcs;
-    [SerializeField] private List<int> DontDestroyLines = new List<int>();
+    [SerializeField] internal List<int> DontDestroyLines = new List<int>();
 
     internal int CurrentLines;
     private int LineIndex;

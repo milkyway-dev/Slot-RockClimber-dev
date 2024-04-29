@@ -246,7 +246,7 @@ public class SlotBehaviour : MonoBehaviour
 
         if (PayCalculator.LineIndex >= PayCalculator.LineList.Count)
             PayCalculator.LineIndex = 0;
-
+        print(PayCalculator.LineIndex);
         PayCalculator.GeneratePayoutLinesBackend();
         PayCalculator.ToggleLineOff();
 

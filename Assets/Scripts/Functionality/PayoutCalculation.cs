@@ -36,6 +36,7 @@ public class PayoutCalculation : MonoBehaviour
         LineIndex = LineList.Count - 1;
         inActiveLineButtons[LineIndex].SetActive(false);
         activeLineButtons[LineIndex].SetActive(true);
+
     }
 
     //generate lines at runtime accordingly
@@ -51,7 +52,7 @@ public class PayoutCalculation : MonoBehaviour
             return;
         }
         DontDestroyLines.Clear();
-        for (int i = 0; i < CurrentLines; i++)
+        for (int i = 0; i < LineList[LineIndex]; i++)
         {
             LineObjetcs[i].SetActive(true);
 

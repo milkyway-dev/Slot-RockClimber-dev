@@ -243,7 +243,7 @@ public class UIManager : MonoBehaviour
         {
             if (SoundOn_Object) SoundOn_Object.SetActive(true);
             if (SoundOff_Object) SoundOff_Object.SetActive(false);
-            if (audioController) audioController.ToggleMute(false, "spin");
+            if (audioController) audioController.ToggleMute(false, "wl");
             if (audioController) audioController.ToggleMute(false, "button");
 
         }
@@ -251,7 +251,7 @@ public class UIManager : MonoBehaviour
         {
             if (SoundOn_Object) SoundOn_Object.SetActive(false);
             if (SoundOff_Object) SoundOff_Object.SetActive(true);
-            if (audioController) audioController.ToggleMute(true, "spin");
+            if (audioController) audioController.ToggleMute(true, "wl");
             if (audioController) audioController.ToggleMute(true, "button");
         }
     }

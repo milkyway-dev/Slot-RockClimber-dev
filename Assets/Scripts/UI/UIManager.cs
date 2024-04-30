@@ -68,6 +68,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button PaytableExit_Button;
 
+    [Header("Double Game")]
+    [SerializeField] private Button Double_button;
+    [SerializeField] private GameObject Double_game;
+
     [Header("Settings Popup")]
     [SerializeField]
     private GameObject SettingsPopup_Object;
@@ -119,6 +123,12 @@ public class UIManager : MonoBehaviour
 
         if (PaytableExit_Button) PaytableExit_Button.onClick.RemoveAllListeners();
         if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(delegate { ClosePopup(PaytablePopup_Object); });
+
+        if (Double_button) Double_button.onClick.RemoveAllListeners();
+        if (Double_button) Double_button.onClick.AddListener(delegate { OpenPopup(Double_game); });
+
+        if (Double_button) Double_button.onClick.RemoveAllListeners();
+        if (Double_button) Double_button.onClick.AddListener(delegate { ClosePopup(Double_game); });
 
         //if (Settings_Button) Settings_Button.onClick.RemoveAllListeners();
         //if (Settings_Button) Settings_Button.onClick.AddListener(delegate { OpenPopup(SettingsPopup_Object); });
@@ -204,7 +214,6 @@ public class UIManager : MonoBehaviour
 
     private void OpenPopup(GameObject Popup)
     {
-        if (audioController) audioController.PlayButtonAudio();
         if (audioController)audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
@@ -212,7 +221,6 @@ public class UIManager : MonoBehaviour
 
     private void ClosePopup(GameObject Popup)
     {
-        if (audioController) audioController.PlayWLAudio("spin");
         if (audioController)audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(false);
         if (MainPopup_Object) MainPopup_Object.SetActive(false);

@@ -152,9 +152,6 @@ public class SlotBehaviour : MonoBehaviour
         if (BetOne_button) BetOne_button.onClick.RemoveAllListeners();
         if (BetOne_button) BetOne_button.onClick.AddListener(OnBetOne);
 
-        //if (Double_button) Double_button.onClick.RemoveAllListeners();
-        //if (Double_button) Double_button.onClick.AddListener(OnDouble);
-
         if (AutoSpin_Button) AutoSpin_Button.onClick.RemoveAllListeners();
         if (AutoSpin_Button) AutoSpin_Button.onClick.AddListener(AutoSpin);
 

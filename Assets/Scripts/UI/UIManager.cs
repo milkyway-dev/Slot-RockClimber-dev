@@ -127,8 +127,6 @@ public class UIManager : MonoBehaviour
         if (Double_button) Double_button.onClick.RemoveAllListeners();
         if (Double_button) Double_button.onClick.AddListener(delegate { OpenPopup(Double_game); });
 
-        if (Double_button) Double_button.onClick.RemoveAllListeners();
-        if (Double_button) Double_button.onClick.AddListener(delegate { ClosePopup(Double_game); });
 
         //if (Settings_Button) Settings_Button.onClick.RemoveAllListeners();
         //if (Settings_Button) Settings_Button.onClick.AddListener(delegate { OpenPopup(SettingsPopup_Object); });

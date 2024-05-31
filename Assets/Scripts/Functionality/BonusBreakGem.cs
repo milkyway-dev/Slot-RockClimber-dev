@@ -1,0 +1,84 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
+public class BonusBreakGem : MonoBehaviour
+{
+    [SerializeField] private Button gem;
+    [SerializeField] private ImageAnimation imageAnimation;
+    [SerializeField] private List<Sprite> idleAnimation;
+    [SerializeField] private List<Sprite> breakAnimation;
+    [SerializeField] internal double value;
+    [SerializeField] BonusController bonusController;
+    [SerializeField] private TMP_Text valueText;
+    void Start()
+    {
+
+        //Reset();
+        if (gem) gem.onClick.RemoveAllListeners();
+        if (gem) gem.onClick.AddListener(Break_gem);
+
+    }
+
+    void Break_gem()
+    {
+
+        if (bonusController.currentBreakCount < bonusController.maxBreakCount) {
+            bonusController.raycastPanel.SetActive(true);
+            valueText.gameObject.SetActive(true);
+
+            imageAnimation.StopAnimation();
+            imageAnimation.doLoopAnimation = false;
+            gem.interactable = false;
+            imageAnimation.textureArray = breakAnimation;
+            imageAnimation.StartAnimation();
+            value = bonusController.OnBreakGem();
+
+            if (value == -1) valueText.text = "Game Over";
+            else valueText.text = "+"+value.ToString();
+
+            valueText.transform.DOLocalMoveY(300, 0.65f).onComplete=()=> {
+
+                valueText.gameObject.SetActive(false);
+                valueText.transform.localPosition = Vector2.zero;
+                valueText.text = "0";
+            };
+            DOVirtual.DelayedCall(0.66f, () =>
+            {
+                bonusController.raycastPanel.SetActive(false);
+
+
+            });
+            if (value == -1) {
+
+                bonusController.GameOver();
+            }
+        }
+
+    }
+
+
+
+    void Reset() {
+        gem.interactable = true;
+        imageAnimation.textureArray = idleAnimation;
+        imageAnimation.doLoopAnimation = true;
+
+
+    }
+
+  
+    private void OnDisable()
+    {
+        value = 0;
+        imageAnimation.StopAnimation();
+    }
+    private void OnEnable()
+    {
+        Reset();
+        if (imageAnimation.textureArray.Count>0)
+        imageAnimation.StartAnimation();
+    }
+}

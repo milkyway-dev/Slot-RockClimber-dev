@@ -133,6 +133,13 @@ public class SocketIOManager : MonoBehaviour
         Application.ExternalCall("window.parent.postMessage", "OnEnter", "*");
     }
 
+    internal void CloseWebSocket()
+    {
+        if (currentSocket != null)
+        {
+            currentSocket.Close();
+        }
+    }
     internal void AccumulateResult(double currBet)
     {
         if (currentSocket != null)
@@ -315,7 +322,7 @@ public class GameData
 [Serializable]
 public class GambleResults
 {
-    public double currentWining;
+    //public double currentWining;
     public double totalWinningAmount;
 
 }

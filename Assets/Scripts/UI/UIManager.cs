@@ -182,6 +182,8 @@ public class UIManager : MonoBehaviour
 
     private void CallOnExitFunction()
     {
+        print("close");
+        slotBehaviour.CallCloseSocket();
         Application.ExternalCall("window.parent.postMessage", "onExit", "*");
     }
 

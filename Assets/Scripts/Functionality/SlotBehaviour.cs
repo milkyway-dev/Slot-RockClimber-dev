@@ -407,6 +407,7 @@ public class SlotBehaviour : MonoBehaviour
 
         CheckPopups = true;
 
+
         //if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.haveWon.ToString();
         print("player data.currentwining " + SocketManager.playerdata.currentWining);
 
@@ -424,12 +425,6 @@ public class SlotBehaviour : MonoBehaviour
             CheckBonusGame();
 
         }
-        //CheckBonusGame();
-        //else
-        //{
-        //    yield return new WaitForSeconds(1);
-        //    CheckBonusGame();
-        //}
 
         print("checkpopups, " + CheckPopups);
         yield return new WaitUntil(() => !CheckPopups);
@@ -444,7 +439,7 @@ public class SlotBehaviour : MonoBehaviour
             yield return new WaitForSeconds(2f);
             IsSpinning = false;
         }
-        if (SocketManager.resultData.freeSpins > 0)
+        if (SocketManager.resultData.freeSpins > 0  && !IsFreeSpin)
         {
             uiManager.FreeSpinProcess((int)SocketManager.resultData.freeSpins);
         }
@@ -504,6 +499,11 @@ public class SlotBehaviour : MonoBehaviour
         }
         TempList.Clear();
         TempList.TrimExcess();
+    }
+
+    internal void CallCloseSocket()
+    {
+        SocketManager.CloseWebSocket();
     }
 
     private void CheckPayoutLineBackend(List<int> LineId, List<string> points_AnimString, double jackpot = 0)

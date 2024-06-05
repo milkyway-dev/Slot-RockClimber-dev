@@ -416,7 +416,7 @@ public class SlotBehaviour : MonoBehaviour
         if (freeSpin_text) freeSpin_text.text = SocketManager.resultData.freeSpins.ToString();
 
 
-        if (SocketManager.playerdata.currentWining > 1)
+        if (SocketManager.playerdata.currentWining >= bet*15)
         {
             uiManager.PopulateWin(SocketManager.playerdata.currentWining);
 
@@ -430,7 +430,7 @@ public class SlotBehaviour : MonoBehaviour
         yield return new WaitUntil(() => !CheckPopups);
         if (!IsAutoSpin)
         {
-        if(SocketManager.playerdata.currentWining>1) gambleController.toggleDoubleButton(true);
+        if(SocketManager.playerdata.currentWining>0) gambleController.toggleDoubleButton(true);
             ToggleButtonGrp(true);
             IsSpinning = false;
         }

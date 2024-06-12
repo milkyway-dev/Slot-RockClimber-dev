@@ -503,7 +503,7 @@ public class SlotBehaviour : MonoBehaviour
 
     internal void CallCloseSocket()
     {
-        SocketManager.CloseWebSocket();
+        SocketManager.CloseSocket();
     }
 
     private void CheckPayoutLineBackend(List<int> LineId, List<string> points_AnimString, double jackpot = 0)

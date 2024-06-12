@@ -30,7 +30,7 @@ public class ManageLineButtons : MonoBehaviour, IPointerEnterHandler,IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
 	{
 
-        if (num < payoutManager.LineList[payoutManager.currentLineIndex] + 1) {
+        if (num < payoutManager.LineList[payoutManager.currentLineIndex]) {
             isActive = true;
             btn.interactable = true;
         }

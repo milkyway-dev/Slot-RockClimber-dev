@@ -49,7 +49,7 @@ public class SocketIOManager : MonoBehaviour
 
     private void OpenWebsocket()
     {
-        var webSocket = new WebSocket(new Uri("wss://qwc82cmb-3036.inc1.devtunnels.ms/"));
+        var webSocket = new WebSocket(new Uri("wss://qwc82cmb-3035.inc1.devtunnels.ms/"));
         webSocket.OnOpen += OnWebSocketOpen;
         webSocket.OnMessage += OnMessageReceived;
         webSocket.OnError += OnWebSocketError;

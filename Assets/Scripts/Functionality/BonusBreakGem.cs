@@ -15,17 +15,15 @@ public class BonusBreakGem : MonoBehaviour
     [SerializeField] private TMP_Text valueText;
     void Start()
     {
-
         //Reset();
         if (gem) gem.onClick.RemoveAllListeners();
         if (gem) gem.onClick.AddListener(Break_gem);
-
     }
 
     void Break_gem()
     {
-
-        if (bonusController.currentBreakCount < bonusController.maxBreakCount) {
+        if (bonusController.currentBreakCount < bonusController.maxBreakCount)
+        {
             bonusController.raycastPanel.SetActive(true);
             valueText.gameObject.SetActive(true);
 
@@ -36,11 +34,19 @@ public class BonusBreakGem : MonoBehaviour
             imageAnimation.StartAnimation();
             value = bonusController.OnBreakGem();
 
-            if (value == -1) valueText.text = "Game Over";
-            else valueText.text = "+"+value.ToString();
+            if (value > 0)
+            {
+                valueText.text = "+" + value.ToString();
+                bonusController.PlayWinSound();
+            }
+            else
+            {
+                valueText.text = "Game Over";
+                bonusController.PlayLoseSound();
+            }
 
-            valueText.transform.DOLocalMoveY(300, 0.65f).onComplete=()=> {
-
+            valueText.transform.DOLocalMoveY(300, 0.65f).onComplete=()=>
+            {
                 valueText.gameObject.SetActive(false);
                 valueText.transform.localPosition = Vector2.zero;
                 valueText.text = "0";
@@ -61,12 +67,11 @@ public class BonusBreakGem : MonoBehaviour
 
 
 
-    void Reset() {
+    void Reset()
+    {
         gem.interactable = true;
         imageAnimation.textureArray = idleAnimation;
         imageAnimation.doLoopAnimation = true;
-
-
     }
 
   

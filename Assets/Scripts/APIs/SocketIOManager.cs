@@ -10,11 +10,16 @@ using System.Linq;
 using Newtonsoft.Json;
 using Best.SocketIO;
 using Best.SocketIO.Events;
+using System.Runtime.Serialization;
+using Newtonsoft.Json.Linq;
 
 public class SocketIOManager : MonoBehaviour
 {
     [SerializeField]
     private SlotBehaviour slotManager;
+
+    [SerializeField]
+    private UIManager uiManager;
 
     internal GameData initialData = null;
     internal UIData initUIData = null;
@@ -28,14 +33,15 @@ public class SocketIOManager : MonoBehaviour
     [SerializeField]
     internal JSHandler _jsManager;
 
-    [SerializeField]
-    private string SocketURI;
+    protected string SocketURI = "https://dev.casinoparadize.com";
 
     [SerializeField]
     private string testToken;
     internal bool isResultdone = false;
 
     protected string gameID = "SL-RC";
+
+    internal bool isLoaded = false;
 
     private void Start()
     {
@@ -49,6 +55,11 @@ public class SocketIOManager : MonoBehaviour
     }
 
     string myAuth = null;
+
+    private void Awake()
+    {
+        isLoaded = false;
+    }
 
     private void OpenSocket()
     {
@@ -151,6 +162,7 @@ public class SocketIOManager : MonoBehaviour
     private void OnDisconnected(string response)
     {
         Debug.Log("Disconnected from the server");
+        uiManager.DisconnectionPopup();
     }
 
     private void OnError(string response)
@@ -242,7 +254,7 @@ public class SocketIOManager : MonoBehaviour
 
         slotManager.SetInitialUI();
 
-        Application.ExternalCall("window.parent.postMessage", "OnEnter", "*");
+        isLoaded = true;
     }
 
     internal void CloseSocket()
@@ -393,7 +405,8 @@ public class SocketIOManager : MonoBehaviour
 public class BetData
 {
     public double currentBet;
-    //public double TotalLines;
+    public double currentLines;
+    public double spins;
 }
 
 [Serializable]
@@ -408,7 +421,6 @@ public class GambleData
 public class AuthData
 {
     public string GameID;
-    //public double TotalLines;
 }
 
 [Serializable]
@@ -495,23 +507,34 @@ public class Paylines
 [Serializable]
 public class Symbol
 {
-    public Multiplier multiplier { get; set; }
-}
+    public int ID { get; set; }
+    public string Name { get; set; }
+    [JsonProperty("multiplier")]
+    public object MultiplierObject { get; set; }
 
-[Serializable]
-public class Multiplier
-{
-    [JsonProperty("5x")]
-    public double _5x { get; set; }
+    // This property will hold the properly deserialized list of lists of integers
+    [JsonIgnore]
+    public List<List<int>> Multiplier { get; private set; }
 
-    [JsonProperty("4x")]
-    public double _4x { get; set; }
-
-    [JsonProperty("3x")]
-    public double _3x { get; set; }
-
-    [JsonProperty("2x")]
-    public double _2x { get; set; }
+    // Custom deserialization method to handle the conversion
+    [OnDeserialized]
+    internal void OnDeserializedMethod(StreamingContext context)
+    {
+        // Handle the case where multiplier is an object (empty in JSON)
+        if (MultiplierObject is JObject)
+        {
+            Multiplier = new List<List<int>>();
+        }
+        else
+        {
+            // Deserialize normally assuming it's an array of arrays
+            Multiplier = JsonConvert.DeserializeObject<List<List<int>>>(MultiplierObject.ToString());
+        }
+    }
+    public object defaultAmount { get; set; }
+    public object symbolsCount { get; set; }
+    public object increaseValue { get; set; }
+    public int freeSpin { get; set; }
 }
 
 [Serializable]

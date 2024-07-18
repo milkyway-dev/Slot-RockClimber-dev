@@ -33,6 +33,7 @@ public class CardFlip : MonoBehaviour
             Card_transform.localEulerAngles = new Vector3(0, 180, 0);
             Card_transform.DORotate(new Vector3(0, 0, 0), 1, RotateMode.FastBeyond360);
             once = true;
+            if (gambleController) gambleController.CardFlipSound();
             DOVirtual.DelayedCall(0.3f, changeSprite); 
         }
     }

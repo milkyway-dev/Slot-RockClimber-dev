@@ -160,6 +160,9 @@ public class GambleController : MonoBehaviour
         tabloAnimation.StartAnimation();
     }
 
-
+    internal void CardFlipSound()
+    {
+        if (audioController) audioController.PlayBonusAudio("card");
+    }
 
 }

@@ -19,9 +19,10 @@ public class BonusController : MonoBehaviour
     [SerializeField] internal int maxBreakCount = 0;
  
 
-    internal double OnBreakGem() {
+    internal double OnBreakGem()
+    {
         currentBreakCount++;
-        return gemValues[currentBreakCount-1];
+        return gemValues[currentBreakCount - 1];
     }
 
     internal void GameOver()
@@ -31,10 +32,10 @@ public class BonusController : MonoBehaviour
         Invoke("OnGameOver", 1.5f);
     }
 
-    void OnGameOver() {
-
+    void OnGameOver()
+    {
         slotManager.CheckPopups = false;
-        //_audioManager.SwitchBGSound(false);
+        _audioManager.SwitchBGSound(false);
         if (bonus_game) bonus_game.SetActive(false);
     }
 
@@ -54,7 +55,17 @@ public class BonusController : MonoBehaviour
             }
         }
 
-        //_audioManager.SwitchBGSound(true);
+        _audioManager.SwitchBGSound(true);
         if (bonus_game) bonus_game.SetActive(true);
+    }
+
+    internal void PlayWinSound()
+    {
+        if (_audioManager) _audioManager.PlayBonusAudio("win");
+    }
+
+    internal void PlayLoseSound()
+    {
+        if (_audioManager) _audioManager.PlayBonusAudio("lose");
     }
 }

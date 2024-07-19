@@ -279,6 +279,8 @@ public class SocketIOManager : MonoBehaviour
         MessageData message = new MessageData();
         message.data = new BetData();
         message.data.currentBet = bet;
+        message.data.spins = 1;
+        message.data.currentLines = 9;
         message.id = namespaceName;
         // Serialize message data to JSON
         string json = JsonUtility.ToJson(message);
@@ -448,7 +450,7 @@ public class AbtLogo
 public class GameData
 {
     public List<List<string>> Reel { get; set; }
-    public List<int> Bets { get; set; }
+    public List<double> Bets { get; set; }
     public bool canSwitchLines { get; set; }
     public List<int> LinesCount { get; set; }
     public List<int> autoSpin { get; set; }

@@ -160,8 +160,8 @@ public class SlotBehaviour : MonoBehaviour
         BetCounter = SocketManager.initialData.Bets.Count - 1;
         if (LineBet_text) LineBet_text.text = SocketManager.initialData.Bets[BetCounter].ToString();
         if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.Bets[BetCounter] * Lines).ToString();
-        if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString();
-        if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString();
+        if (TotalWin_text) TotalWin_text.text = "0.00";
+        if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
         currentBalance = SocketManager.playerdata.Balance;
         currentTotalBet = SocketManager.initialData.Bets[BetCounter] * Lines;
         CompareBalance();
@@ -386,9 +386,9 @@ public class SlotBehaviour : MonoBehaviour
 
         balance = balance - bet;
 
-        if (Balance_text) Balance_text.text = balance.ToString();
+        if (Balance_text) Balance_text.text = balance.ToString("f2");
 
-        SocketManager.AccumulateResult(bet);
+        SocketManager.AccumulateResult(BetCounter);
         print("before result");
         yield return new WaitUntil(() => SocketManager.isResultdone);
 
@@ -414,10 +414,10 @@ public class SlotBehaviour : MonoBehaviour
         CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
         KillAllTweens();
 
-
         CheckPopups = true;
 
-
+        if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString("f2");
+        if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
         if (SocketManager.resultData.isBonus)
         {
             CheckBonusGame();
@@ -483,7 +483,7 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     internal void updateBalance() {
-        if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString();
+        if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
     }
 
     private void StartGameAnimation(GameObject animObjects)

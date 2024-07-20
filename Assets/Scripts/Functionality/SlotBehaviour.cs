@@ -447,15 +447,15 @@ public class SlotBehaviour : MonoBehaviour
 
     internal void CheckWinPopups()
     {
-        if (SocketManager.resultData.WinAmout >= currentTotalBet * 5 && SocketManager.resultData.WinAmout < currentTotalBet * 10)
+        if (SocketManager.resultData.WinAmout >= currentTotalBet * 10 && SocketManager.resultData.WinAmout < currentTotalBet * 15)
         {
             uiManager.PopulateWin(1, SocketManager.resultData.WinAmout);
         }
-        else if (SocketManager.resultData.WinAmout >= currentTotalBet * 10 && SocketManager.resultData.WinAmout < currentTotalBet * 15)
+        else if (SocketManager.resultData.WinAmout >= currentTotalBet * 15 && SocketManager.resultData.WinAmout < currentTotalBet * 20)
         {
             uiManager.PopulateWin(2, SocketManager.resultData.WinAmout);
         }
-        else if (SocketManager.resultData.WinAmout >= currentTotalBet * 15)
+        else if (SocketManager.resultData.WinAmout >= currentTotalBet * 20)
         {
             uiManager.PopulateWin(3, SocketManager.resultData.WinAmout);
         }
@@ -606,7 +606,6 @@ public class SlotBehaviour : MonoBehaviour
             alltweens[i].Kill();
         }
         alltweens.Clear();
-
     }
     #endregion
 }

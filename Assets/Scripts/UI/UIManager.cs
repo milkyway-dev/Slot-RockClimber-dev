@@ -129,9 +129,6 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private SocketIOManager socketManager;
 
-    private bool isMusic = true;
-    private bool isSound = true;
-
     private bool isExit = false;
 
     private void Awake()
@@ -199,9 +196,6 @@ public class UIManager : MonoBehaviour
         if (Music_slider) Music_slider.onValueChanged.AddListener(delegate { ChangeMusic(); });
 
         if (audioController) audioController.ToggleMute(false);
-
-        isMusic = true;
-        isSound = true;
 
         if (GameExit_Button) GameExit_Button.onClick.RemoveAllListeners();
         if (GameExit_Button) GameExit_Button.onClick.AddListener(delegate { OpenPopup(QuitPopup_Object); });

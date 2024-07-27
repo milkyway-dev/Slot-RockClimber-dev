@@ -237,6 +237,7 @@ public class SocketIOManager : MonoBehaviour
                     playerdata = myData.message.PlayerData;
                     bonusdata = myData.message.BonusData;
                     List<string> InitialReels = ConvertListOfListsToStrings(initialData.Reel);
+                    GambleLimit = myData.message.maxGambleBet;
                     InitialReels = RemoveQuotes(InitialReels);
                     PopulateSlotSocket(InitialReels);
                     break;

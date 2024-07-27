@@ -1020,13 +1020,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4529,8 +4529,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: DEALER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7426b609eb2ba4a0ba7a6ec787165a1e, type: 2}
+  m_sharedMaterial: {fileID: 4488374881921247725, guid: 7426b609eb2ba4a0ba7a6ec787165a1e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4554,13 +4554,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 45.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4785,7 +4785,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTM0MDdmZDRlOGJiMDFjNTNjMDk0YiIsInVzZXJuYW1lIjoiZWthbnNoIiwicm9sZSI6InBsYXllciIsImlhdCI6MTcyMTk3NTIzNywiZXhwIjoxNzIyMDYxNjM3fQ.YvtCcTIbQjJkrD9NjsEKvwbUKhvgUfC5X5anDRq0is8
+  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTM0MDdmZDRlOGJiMDFjNTNjMDk0YiIsInVzZXJuYW1lIjoiZWthbnNoIiwicm9sZSI6InBsYXllciIsImlhdCI6MTcyMjA1MzA4OSwiZXhwIjoxNzIyNjU3ODg5fQ.M8HWn15wS3q-pQgPTr1mNFGwmjSn5hRokJjfz9WNJQ8
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5893,8 +5893,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -313}
-  m_SizeDelta: {x: 459, y: 198.7}
+  m_AnchoredPosition: {x: 0, y: -372.69}
+  m_SizeDelta: {x: 627, y: 318.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &602423019
 MonoBehaviour:
@@ -6143,6 +6143,8 @@ GameObject:
   - component: {fileID: 662805894}
   - component: {fileID: 662805897}
   - component: {fileID: 662805896}
+  - component: {fileID: 662805899}
+  - component: {fileID: 662805898}
   m_Layer: 5
   m_Name: Dealer_Card
   m_TagString: Untagged
@@ -6208,6 +6210,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662805893}
   m_CullTransparentMesh: 1
+--- !u!114 &662805898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662805893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 662805896}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &662805899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662805893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6d88ed3611944ec9ebbd96f36f19e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardImage: {fileID: 0}
+  Card_Button: {fileID: 662805898}
+  gambleController: {fileID: 2118856088}
 --- !u!1 &672233071
 GameObject:
   m_ObjectHideFlags: 0
@@ -10785,13 +10846,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -14423,8 +14484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.68, y: -5.9}
-  m_SizeDelta: {x: 249.45, y: 85.09}
+  m_AnchoredPosition: {x: 0, y: 1.47}
+  m_SizeDelta: {x: 399.77, y: 99.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489397743
 MonoBehaviour:
@@ -19268,13 +19329,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -21927,65 +21988,68 @@ MonoBehaviour:
   - {fileID: 66397154}
   winamount: {fileID: 1489397743}
   slotController: {fileID: 2046803210}
-  cardSpriteList:
-  - {fileID: 21300000, guid: 9fbd8c1b16fc746818773c244fb32769, type: 3}
-  - {fileID: 21300000, guid: 9b0ac386387d840d38b940aef640ec5d, type: 3}
-  - {fileID: 21300000, guid: a26882e53b4304c4587a27eb86a9108c, type: 3}
-  - {fileID: 21300000, guid: be83bbb511b6f4aee8f1a22d0b464cd8, type: 3}
-  - {fileID: 21300000, guid: ce098b275ba5d475fac7ac8d8d014461, type: 3}
-  - {fileID: 21300000, guid: 79a9a9adc6481472aa7037fc062257b8, type: 3}
-  - {fileID: 21300000, guid: 7dfeca65b3cc04e758f7791b469d3dce, type: 3}
-  - {fileID: 21300000, guid: a241b783b7c304a0ab85c5adde42024a, type: 3}
-  - {fileID: 21300000, guid: cddc6813d90e044d9a5d701b073b44bf, type: 3}
-  - {fileID: 21300000, guid: 316503537b2a844508ec6d7ad6bc5568, type: 3}
-  - {fileID: 21300000, guid: 3f13258dfce4341a7af13b6e8e5939ae, type: 3}
-  - {fileID: 21300000, guid: ce57d68afdc4a47ba9f51ca223942970, type: 3}
-  - {fileID: 21300000, guid: a36f4908ae82e4032b4849b4a01bfd2f, type: 3}
-  - {fileID: 21300000, guid: 6500a1ba6f63f49999e6884ec7166534, type: 3}
-  - {fileID: 21300000, guid: 8fbe73316ea2c46c1b21d6b9632f075e, type: 3}
-  - {fileID: 21300000, guid: 1eea88665083d4143a1a619406a4e80b, type: 3}
-  - {fileID: 21300000, guid: 00f94761ee7da41b8b229ef04e57b47f, type: 3}
-  - {fileID: 21300000, guid: 03a59aab5a082463d92f31d1c8bd3002, type: 3}
-  - {fileID: 21300000, guid: d4234923b8dad42968353d1298aff221, type: 3}
-  - {fileID: 21300000, guid: 83cef554a1c44455d870529be5d55e70, type: 3}
-  - {fileID: 21300000, guid: aa5da111a06c14d3f92fe891712f8601, type: 3}
-  - {fileID: 21300000, guid: ac1a549ce8e1b45b9ba01684a4fadd12, type: 3}
-  - {fileID: 21300000, guid: 6e7c93f71963b41fda2d27f20007b353, type: 3}
-  - {fileID: 21300000, guid: 2be9b1c628aca4b4c875198bb7393144, type: 3}
-  - {fileID: 21300000, guid: e6be5ae9d37f947728c5b214611625c3, type: 3}
-  - {fileID: 21300000, guid: 96116583b62154cc4a407020cda1dfde, type: 3}
-  - {fileID: 21300000, guid: 0f224c574f2d24c7fb8e9144b66ddf42, type: 3}
-  - {fileID: 21300000, guid: 52883ed0c237a4ce0bd58cde51d71da9, type: 3}
-  - {fileID: 21300000, guid: 4f4e70ae395914465b2dee45a82ec094, type: 3}
-  - {fileID: 21300000, guid: d4f821058f8494e509e8d395e1864289, type: 3}
-  - {fileID: 21300000, guid: 11cc69fc0731446a2a85c3559a98719d, type: 3}
-  - {fileID: 21300000, guid: 7bccad19e7c69434aa6c8844aaeac922, type: 3}
-  - {fileID: 21300000, guid: a4270632d87ad455e8cddc457ea115d2, type: 3}
-  - {fileID: 21300000, guid: 0bf0c2141982b4d9ca1999dfed7fe7fa, type: 3}
-  - {fileID: 21300000, guid: 807d97cfd9cc04e9fa901ab2c97b666a, type: 3}
-  - {fileID: 21300000, guid: b418546887f6d43149a22ddfbadd1b68, type: 3}
-  - {fileID: 21300000, guid: e01f428bda5e6468b915fcf5bb21c8a6, type: 3}
-  - {fileID: 21300000, guid: b47a33fa6c10240b2b830978a871c3ec, type: 3}
-  - {fileID: 21300000, guid: e506a199129ac4eb2968baa6f345257b, type: 3}
-  - {fileID: 21300000, guid: 2c28c801cad244e5c8392e28f40cea63, type: 3}
-  - {fileID: 21300000, guid: a2ff40de58ad64fc08c86fdd23d46722, type: 3}
-  - {fileID: 21300000, guid: 8e9f87c9aed3a4604a78c604b76735fc, type: 3}
-  - {fileID: 21300000, guid: 46986ebc9c6854fadaee29d3a21d5d32, type: 3}
-  - {fileID: 21300000, guid: f9ceee6d75593434d83f90e605a7cf15, type: 3}
-  - {fileID: 21300000, guid: d54730ad068294072a6c8162ad822008, type: 3}
-  - {fileID: 21300000, guid: f35c1977412454f4282af74358bb8d39, type: 3}
-  - {fileID: 21300000, guid: c2272b127c0924192ada2a57c4cb76ee, type: 3}
-  - {fileID: 21300000, guid: af990cc4b107d47d3bddffe7cc8d55b0, type: 3}
-  - {fileID: 21300000, guid: a7794babbf7164a49b2514174362028b, type: 3}
-  - {fileID: 21300000, guid: 625b0778c424f46e7add5f302a0173eb, type: 3}
-  - {fileID: 21300000, guid: eb9d6f581020647c2b90445e3bf795bc, type: 3}
-  - {fileID: 21300000, guid: aa707736ee8204eb0974702bb601c8c2, type: 3}
+  HeartSpriteList:
+  - {fileID: 21300000, guid: b675c9dd40a324b0d89080f8d6dd66f5, type: 3}
+  - {fileID: 21300000, guid: 034e29fafe23249dc96268bfac0e6f5a, type: 3}
+  - {fileID: 21300000, guid: 11e4f858d87b14d8b8639ec2781e0ba4, type: 3}
+  - {fileID: 21300000, guid: 262231adf28594b0f936775b4a154865, type: 3}
+  - {fileID: 21300000, guid: cb2278e8f70bb45f1bef54a3c21373cd, type: 3}
+  - {fileID: 21300000, guid: 2836b16994005480cbaac71450bbf59f, type: 3}
+  - {fileID: 21300000, guid: 6ba10332e58654085b8a688e9eb97d86, type: 3}
+  - {fileID: 21300000, guid: be6c89d9fef4e46a88a56b2c4ad69430, type: 3}
+  - {fileID: 21300000, guid: c125e1ed5cc6940798c85207a129936c, type: 3}
+  - {fileID: 21300000, guid: 5e0483771a2fe41b090ac388709c8a48, type: 3}
+  - {fileID: 21300000, guid: 025917fc2ac974bbabe50492f0baee6a, type: 3}
+  - {fileID: 21300000, guid: 839762bb8441449f697f37de1bb9fda7, type: 3}
+  - {fileID: 21300000, guid: c0c1c082f047f4ae5be31f97bb9d844d, type: 3}
+  ClubSpriteList:
+  - {fileID: 21300000, guid: df2b93131e86d4587a3df35f94b122c2, type: 3}
+  - {fileID: 21300000, guid: 415491bbbda5448dd872303d6a48a676, type: 3}
+  - {fileID: 21300000, guid: 6861958de74304fcaa760516fccb7046, type: 3}
+  - {fileID: 21300000, guid: e27f565cff89344db8591a9e9ca0712f, type: 3}
+  - {fileID: 21300000, guid: ba97d523c8acc4a619041bb8df4a13a6, type: 3}
+  - {fileID: 21300000, guid: 44c81fef0128f44d2be177bcfdf9e811, type: 3}
+  - {fileID: 21300000, guid: ec42d4da1f693465ca6395dd975a0ba8, type: 3}
+  - {fileID: 21300000, guid: c22c62f6a209b47879bdf483207f8eec, type: 3}
+  - {fileID: 21300000, guid: 314520c73abce42e99147d405987261f, type: 3}
+  - {fileID: 21300000, guid: eccf448ceb56e4b138373ffc9f66bafc, type: 3}
+  - {fileID: 21300000, guid: daf9579ba1e8940779f9ddb172e7959f, type: 3}
+  - {fileID: 21300000, guid: 6033124770d8b41cbbde67e8df05097e, type: 3}
+  - {fileID: 21300000, guid: 9fd835a3edc8842819eae4d318b9ece2, type: 3}
+  SpadeSpriteList:
+  - {fileID: 21300000, guid: 8946cbe10351342d3ba373db14bdf167, type: 3}
+  - {fileID: 21300000, guid: 5d1ca5a8115994a6ea408e014ecf89f5, type: 3}
+  - {fileID: 21300000, guid: 73a58b96edce84fe4b8b488cf57e341d, type: 3}
+  - {fileID: 21300000, guid: b9e3e99cb5cd84b5abbe7e5cc9f68114, type: 3}
+  - {fileID: 21300000, guid: ffe8b69ca3aa347af898478da7c46737, type: 3}
+  - {fileID: 21300000, guid: 5b041fa09ab01466584344d64f0d4c23, type: 3}
+  - {fileID: 21300000, guid: 6bd95f01077514f3290b240d000de110, type: 3}
+  - {fileID: 21300000, guid: d1133d9f9207b430f80f32a14dd72292, type: 3}
+  - {fileID: 21300000, guid: 956d81c421c3c4f32b959cf51d703c95, type: 3}
+  - {fileID: 21300000, guid: 40806b7987090492ea4c566cb36035a8, type: 3}
+  - {fileID: 21300000, guid: 388e3c2ba61f4447294c6a12dd1a04b0, type: 3}
+  - {fileID: 21300000, guid: a18a715e9e6d541fdbc22e1d62611547, type: 3}
+  - {fileID: 21300000, guid: b021cb529dc0e444f93f645ca38d6a42, type: 3}
+  DiamondSpriteList:
+  - {fileID: 21300000, guid: b1af33909b296454182d866cd62b91a3, type: 3}
+  - {fileID: 21300000, guid: 19b20963df5324735b87fbfb13378aab, type: 3}
+  - {fileID: 21300000, guid: 7c66546fdb827471789abffbad8bb38b, type: 3}
+  - {fileID: 21300000, guid: 702e2c766781549b9a02f3694a4cd172, type: 3}
+  - {fileID: 21300000, guid: 8e1022d96153146c8ad11aeec50ea414, type: 3}
+  - {fileID: 21300000, guid: 9d523f0e4e44a4884a10dd5ddf8648ce, type: 3}
+  - {fileID: 21300000, guid: 60450df1d015a4ea3aa9faf12d6caaf0, type: 3}
+  - {fileID: 21300000, guid: 3c77ffa68f6d641c8a174d90f7721549, type: 3}
+  - {fileID: 21300000, guid: d64a7d003db2d4afcb2bcc0939830a11, type: 3}
+  - {fileID: 21300000, guid: 96878df7a4e514c82a10e8d2cc91fee5, type: 3}
+  - {fileID: 21300000, guid: e1800483732ed4a77957197dc3c8b3a5, type: 3}
+  - {fileID: 21300000, guid: 179c2d8f9bfc848ecb34060043762ae5, type: 3}
+  - {fileID: 21300000, guid: 97b16c2be24f74ec483a7a4c62f2bef8, type: 3}
   cardCover: {fileID: 21300000, guid: e2db62992d7c94280843abd1d3172253, type: 3}
   tempSpriteList: []
-  DealerCard: {fileID: 662805896}
   loadingScreen: {fileID: 1319254408}
   slider: {fileID: 337400242}
   tabloAnimation: {fileID: 602423019}
+  DealerCard_Script: {fileID: 662805899}
 --- !u!1 &2120640909
 GameObject:
   m_ObjectHideFlags: 0

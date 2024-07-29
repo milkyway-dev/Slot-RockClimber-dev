@@ -327,6 +327,7 @@ public class SlotBehaviour : MonoBehaviour
     private void StartSlots(bool autoSpin = false)
     {
         if (audioController) audioController.PlaySpinButtonAudio();
+        if (gambleController) gambleController.toggleDoubleButton(false);
         if (!autoSpin)
         {
             if (AutoSpinRoutine != null)

@@ -290,10 +290,13 @@ public class SocketIOManager : MonoBehaviour
     internal void CloseSocket()
     {
         CloseSocketMesssage("EXIT");
-        if (this.manager != null)
+        DOVirtual.DelayedCall(0.1f, () =>
         {
-            this.manager.Close();
-        }
+            if (this.manager != null)
+            {
+                this.manager.Close();
+            }
+        });
     }
 
     private void CloseSocketMesssage(string eventName)

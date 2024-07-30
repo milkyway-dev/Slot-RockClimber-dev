@@ -323,6 +323,16 @@ public class SlotBehaviour : MonoBehaviour
         GenerateMatrix(number);
     }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            if (!IsSpinning)
+            {
+                if (audioController) audioController.StopWLAaudio();
+            }
+        }
+    }
 
     private void StartSlots(bool autoSpin = false)
     {

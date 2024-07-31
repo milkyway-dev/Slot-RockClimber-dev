@@ -318,7 +318,7 @@ public class UIManager : MonoBehaviour
 
         DOTween.To(() => initAmount, (val) => initAmount = val, amount, 1f).OnUpdate(() =>
         {
-            if (megawin_text) megawin_text.text = initAmount.ToString("0.000");
+            if (megawin_text) megawin_text.text = initAmount.ToString("f2");
         });
 
         DOVirtual.DelayedCall(3.5f, () =>

@@ -57,7 +57,7 @@ public class BonusBreakGem : MonoBehaviour
 
 
             });
-            if (value == -1) {
+            if (value <= 0) {
 
                 bonusController.GameOver();
             }

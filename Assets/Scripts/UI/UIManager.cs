@@ -383,7 +383,10 @@ public class UIManager : MonoBehaviour
     {
         if (audioController)audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(false);
-        if (MainPopup_Object) MainPopup_Object.SetActive(false);
+        if (!DisconnectPopup_Object.activeSelf)
+        {
+            if (MainPopup_Object) MainPopup_Object.SetActive(false);
+        }
     }
 
     private void ChangeSound()

@@ -265,9 +265,10 @@ public class SocketIOManager : MonoBehaviour
                     playerdata = myData.message.PlayerData;
                     bonusdata = myData.message.BonusData;
                     List<string> InitialReels = ConvertListOfListsToStrings(initialData.Reel);
+                    List<string> LinesString = ConvertListListIntToListString(initialData.Lines);
                     GambleLimit = myData.message.maxGambleBet;
                     InitialReels = RemoveQuotes(InitialReels);
-                    PopulateSlotSocket(InitialReels);
+                    PopulateSlotSocket(InitialReels, LinesString);
                     break;
                 }
             case "ResultData":
@@ -299,17 +300,34 @@ public class SocketIOManager : MonoBehaviour
         }
     }
 
-    private void PopulateSlotSocket(List<string> slotPop)
-    {
-        for (int i = 0; i < slotPop.Count; i++)
-        {
-            List<int> points = slotPop[i]?.Split(',')?.Select(Int32.Parse)?.ToList();
-            slotManager.PopulateInitalSlots(i, points);
-        }
+    //private void PopulateSlotSocket(List<string> slotPop)
+    //{
+    //    slotManager.shuffleInitialMatrix();
+    //    for (int i = 0; i < slotPop.Count; i++)
+    //    {
+    //        List<int> points = slotPop[i]?.Split(',')?.Select(Int32.Parse)?.ToList();
+    //        slotManager.PopulateInitalSlots(i, points);
+    //    }
 
-        for (int i = 0; i < slotPop.Count; i++)
+    //    //May Be Not Required
+    //    for (int i = 0; i < slotPop.Count; i++)
+    //    {
+    //        slotManager.LayoutReset(i);
+    //    }
+
+    //    slotManager.SetInitialUI();
+
+    //    isLoaded = true;
+    //}
+
+    private void PopulateSlotSocket(List<string> slotPop, List<string> LineIds)
+    {
+        slotManager.shuffleInitialMatrix();
+        Debug.Log(string.Concat("<color=blue><b>", LineIds.Count, "</b></color>"));
+        for (int i = 0; i < LineIds.Count; i++)
         {
-            slotManager.LayoutReset(i);
+            //slotManager.FetchLines(LineIds[i], i);
+            Debug.Log(string.Concat("<color=green><b>", i, "</b></color>"));
         }
 
         slotManager.SetInitialUI();
@@ -537,6 +555,7 @@ public class AbtLogo
 public class GameData
 {
     public List<List<string>> Reel { get; set; }
+    public List<List<int>> Lines { get; set; }
     public List<double> Bets { get; set; }
     public bool canSwitchLines { get; set; }
     public List<int> LinesCount { get; set; }

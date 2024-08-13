@@ -476,12 +476,14 @@ public class SlotBehaviour : MonoBehaviour
         if (!IsAutoSpin)
         {
             ActivateGamble();
+            ToggleButtonGrp(true);
+            IsSpinning = false;
         }
         else
         {
             ActivateGamble();
             yield return new WaitForSeconds(2f);
-            IsSpinning = false;
+            //IsSpinning = false;
         }
         //if (SocketManager.resultData.freeSpins > 0  && !IsFreeSpin)
         //{
@@ -496,8 +498,6 @@ public class SlotBehaviour : MonoBehaviour
             gambleController.GambleTweeningAnim(true);
             gambleController.toggleDoubleButton(true);
         }
-        ToggleButtonGrp(true);
-        IsSpinning = false;
     }
 
     internal void DeactivateGamble()

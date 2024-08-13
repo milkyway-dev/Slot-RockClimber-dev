@@ -42,8 +42,8 @@ public class UIManager : MonoBehaviour
     private GameObject Paytable_Object;
     [SerializeField]
     private RectTransform Paytable_RT;
-
-    [SerializeField] private Button GameExit_Button;
+    [SerializeField]
+    private Button GameExit_Button;
     [Header("Popus UI")]
     [SerializeField]
     private GameObject MainPopup_Object;
@@ -193,7 +193,7 @@ public class UIManager : MonoBehaviour
         if (Paytable_Button) Paytable_Button.onClick.AddListener(delegate { screenCounter = 1; ChangePage(false); OpenPopup(PaytablePopup_Object); });
 
         if (PaytableExit_Button) PaytableExit_Button.onClick.RemoveAllListeners();
-        if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(delegate { ClosePopup(SettingsPopup_Object); });
+        if (PaytableExit_Button) PaytableExit_Button.onClick.AddListener(delegate { ClosePopup(PaytablePopup_Object); });
 
         if (Sound_slider) Sound_slider.onValueChanged.RemoveAllListeners();
         if (Sound_slider) Sound_slider.onValueChanged.AddListener(delegate { ChangeSound(); });

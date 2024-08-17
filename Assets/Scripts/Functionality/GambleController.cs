@@ -7,13 +7,20 @@ using DG.Tweening;
 
 public class GambleController : MonoBehaviour
 {
-    [SerializeField] private GameObject gamble_game;
-    [SerializeField] private Button doubleButton;
-    [SerializeField] private SocketIOManager socketManager;
-    [SerializeField] private AudioController audioController;
-    [SerializeField] internal List<CardFlip> allcards = new List<CardFlip>();
-    [SerializeField] private TMP_Text winamount;
-    [SerializeField] private SlotBehaviour slotController;
+    [SerializeField]
+    private GameObject gamble_game;
+    [SerializeField]
+    private Button doubleButton;
+    [SerializeField]
+    private SocketIOManager socketManager;
+    [SerializeField]
+    private AudioController audioController;
+    [SerializeField]
+    internal List<CardFlip> allcards = new List<CardFlip>();
+    [SerializeField]
+    private TMP_Text winamount;
+    [SerializeField]
+    private SlotBehaviour slotController;
     [SerializeField]
     private Sprite[] HeartSpriteList;
     [SerializeField]
@@ -22,15 +29,21 @@ public class GambleController : MonoBehaviour
     private Sprite[] SpadeSpriteList;
     [SerializeField]
     private Sprite[] DiamondSpriteList;
-    [SerializeField] private Sprite cardCover;
-    [SerializeField] internal List<Sprite> tempSpriteList = new List<Sprite>();
-
-    [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private Image slider;
-
-    [SerializeField] private ImageAnimation tabloAnimation;
+    [SerializeField]
+    private Sprite cardCover;
     [SerializeField]
     private CardFlip DealerCard_Script;
+
+    [SerializeField]
+    private GameObject loadingScreen;
+    [SerializeField]
+    private GameObject GambleEnd_Object;
+    [SerializeField]
+    private Button DoubleEnd_Button;
+    [SerializeField]
+    private Button CollectEnd_Button;
+    [SerializeField]
+    private Image slider;
 
     private Sprite highcard_Sprite;
     private Sprite lowcard_Sprite;
@@ -40,34 +53,66 @@ public class GambleController : MonoBehaviour
     private Tweener Gamble_Tween_Scale = null;
     private Tweener Gamble_Tween_Move = null;
 
+    private Vector3 m_Temp_GambleButton;
+
     internal bool gambleStart = false;
     internal bool isResult = false;
 
-    private Vector3 m_Temp_GambleButton;
-
     private void Start()
     {
+        if (GambleEnd_Object) GambleEnd_Object.SetActive(false);
         if (doubleButton) doubleButton.onClick.RemoveAllListeners();
-        if (doubleButton) doubleButton.onClick.AddListener(StartGamblegame);
+        if (doubleButton) doubleButton.onClick.AddListener(delegate { StartGamblegame(); });
+        if (DoubleEnd_Button) DoubleEnd_Button.onClick.RemoveAllListeners();
+        if (DoubleEnd_Button) DoubleEnd_Button.onClick.AddListener(delegate { NormalCollectFunction(); StartGamblegame(true); });
+        if (CollectEnd_Button) CollectEnd_Button.onClick.RemoveAllListeners();
+        if (CollectEnd_Button) CollectEnd_Button.onClick.AddListener(OnReset);
         toggleDoubleButton(false);
     }
 
-    internal void toggleDoubleButton(bool toggle) {
-
+    internal void toggleDoubleButton(bool toggle)
+    {
         doubleButton.interactable = toggle;
     }
 
-    void StartGamblegame()
+    private void OnReset()
     {
+        if (slotController) slotController.GambleCollect();
+        NormalCollectFunction();
+    }
+
+    void StartGamblegame(bool isRepeat = false)
+    {
+        if (GambleEnd_Object) GambleEnd_Object.SetActive(false);
         GambleTweeningAnim(false);
         slotController.DeactivateGamble();
-        winamount.text = "0";
+        if (!isRepeat)
+        {
+            winamount.text = "0";
+        }
         if (audioController) audioController.PlayButtonAudio();
         if (gamble_game) gamble_game.SetActive(true);
         loadingScreen.SetActive(true);
         StartCoroutine(loadingRoutine());
         StartCoroutine(GambleCoroutine());
     }
+
+    internal void GambleTweeningAnim(bool IsStart)
+    {
+        if (IsStart)
+        {
+            m_Temp_GambleButton = doubleButton.gameObject.transform.position;
+            Gamble_Tween_Scale = doubleButton.gameObject.GetComponent<RectTransform>().DOScale(new Vector2(1.18f, 1.18f), 1f).SetLoops(-1, LoopType.Yoyo).SetDelay(0);
+            //Gamble_Tween_Move = doubleButton.gameObject.GetComponent<RectTransform>().DOMoveY(doubleButton.transform.position.y + .1f, 1f).SetLoops(-1, LoopType.Yoyo).SetDelay(0);
+        }
+        else
+        {
+            Gamble_Tween_Scale.Kill();
+            //Gamble_Tween_Move.Kill();
+            doubleButton.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
+        }
+    }
+
 
     private void ComputeCards()
     {
@@ -196,6 +241,7 @@ public class GambleController : MonoBehaviour
         ComputeCards();
         gambleStart = true;
     }
+
     internal Sprite GetCard()
     {
         if (socketManager.myMessage.playerWon)
@@ -252,16 +298,15 @@ public class GambleController : MonoBehaviour
         if (socketManager.myMessage.playerWon)
         {
             winamount.text = "YOU WIN" + "\n" + socketManager.myMessage.currentWining.ToString();
+            if (GambleEnd_Object) GambleEnd_Object.SetActive(true);
         }
         else
         {
             winamount.text = "YOU LOSE" + "\n" + "0";
+            StartCoroutine(Collectroutine());
         }
 
-        StartCoroutine(Collectroutine());
-
     }
-
 
 
     IEnumerator Collectroutine()
@@ -283,33 +328,33 @@ public class GambleController : MonoBehaviour
 
     }
 
-    void OnGameOver()
+    private void NormalCollectFunction()
     {
-        StartCoroutine(Collectroutine());
+        gambleStart = false;
+        slotController.updateBalance();
+        if (gamble_game) gamble_game.SetActive(false);
+        allcards.ForEach((element) =>
+        {
+            element.Card_Button.image.sprite = cardCover;
+            element.Reset();
+
+        });
+        DealerCard_Script.Card_Button.image.sprite = cardCover;
+        DealerCard_Script.once = false;
+        toggleDoubleButton(false);
 
     }
 
-    internal void GambleTweeningAnim(bool IsStart)
+    void OnGameOver()
     {
-        if (IsStart)
-        {
-            m_Temp_GambleButton = doubleButton.gameObject.transform.position;
-            Gamble_Tween_Scale = doubleButton.gameObject.GetComponent<RectTransform>().DOScale(new Vector2(1.18f, 1.18f), 1f).SetLoops(-1, LoopType.Yoyo).SetDelay(0);
-            //Gamble_Tween_Move = doubleButton.gameObject.GetComponent<RectTransform>().DOMoveY(doubleButton.transform.position.y + .1f, 1f).SetLoops(-1, LoopType.Yoyo).SetDelay(0);
-        }
-        else
-        {
-            Gamble_Tween_Scale.Kill();
-            //Gamble_Tween_Move.Kill();
-            doubleButton.gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
-        }
+        StartCoroutine(Collectroutine());
     }
 
     IEnumerator loadingRoutine()
     {
-
         float fillAmount = 0;
-        while (fillAmount<0.9) {
+        while (fillAmount < 0.9)
+        {
             fillAmount += Time.deltaTime;
             slider.fillAmount = fillAmount;
             if (fillAmount == 0.9) yield break;
@@ -319,12 +364,5 @@ public class GambleController : MonoBehaviour
         slider.fillAmount = 1;
         yield return new WaitForSeconds(1f);
         loadingScreen.SetActive(false);
-        tabloAnimation.StartAnimation();
     }
-
-    internal void CardFlipSound()
-    {
-        if (audioController) audioController.PlayBonusAudio("card");
-    }
-
 }

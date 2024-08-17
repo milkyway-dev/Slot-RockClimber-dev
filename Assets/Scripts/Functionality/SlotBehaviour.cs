@@ -505,6 +505,11 @@ public class SlotBehaviour : MonoBehaviour
         StopAutoSpin();
     }
 
+    internal void GambleCollect()
+    {
+        SocketManager.GambleCollectCall();
+    }
+
     internal void CheckWinPopups()
     {
         if (SocketManager.resultData.WinAmout >= currentTotalBet * 10 && SocketManager.resultData.WinAmout < currentTotalBet * 15)

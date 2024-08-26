@@ -68,6 +68,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button Left_Button;
     [SerializeField]
+    private TMP_Text m_Bonus_Text;
+    [SerializeField]
     private GameObject[] Info_Screens;
     int screenCounter = 0;
 
@@ -200,6 +202,7 @@ public class UIManager : MonoBehaviour
 
         if (Music_slider) Music_slider.onValueChanged.RemoveAllListeners();
         if (Music_slider) Music_slider.onValueChanged.AddListener(delegate { ChangeMusic(); });
+        if (Music_slider) Music_slider.value = 0.3f;
 
         if (audioController) audioController.ToggleMute(false);
 
@@ -285,6 +288,13 @@ public class UIManager : MonoBehaviour
                 text += "\n3x - " + paylines.symbols[i].Multiplier[2][0];
             }
             if (SymbolsText[i]) SymbolsText[i].text = text;
+        }
+        for (int i = 0; i < paylines.symbols.Count; i++)
+        {
+            if (paylines.symbols[i].Name.ToUpper() == "BONUS")
+            {
+                if (m_Bonus_Text) m_Bonus_Text.text = paylines.symbols[i].description.ToString();
+            }
         }
     }
 

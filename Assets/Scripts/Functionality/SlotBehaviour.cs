@@ -483,7 +483,7 @@ public class SlotBehaviour : MonoBehaviour
         {
             ActivateGamble();
             yield return new WaitForSeconds(2f);
-            //IsSpinning = false;
+            IsSpinning = false;
         }
         //if (SocketManager.resultData.freeSpins > 0  && !IsFreeSpin)
         //{
@@ -497,6 +497,7 @@ public class SlotBehaviour : MonoBehaviour
         {
             gambleController.GambleTweeningAnim(true);
             gambleController.toggleDoubleButton(true);
+            IsSpinning = false;
         }
     }
 

@@ -45,13 +45,17 @@ public class SocketIOManager : MonoBehaviour
     protected string gameID = "SL-RC";
 
     internal bool isLoaded = false;
+    internal bool SetInit = false;
 
     private const int maxReconnectionAttempts = 6;
     private readonly TimeSpan reconnectionDelay = TimeSpan.FromSeconds(10);
 
     private void Start()
     {
+        SetInit = false;
         OpenSocket();
+
+        //Debug.unityLogger.logEnabled = false;
     }
     void ReceiveAuthToken(string jsonData)
     {
@@ -69,7 +73,6 @@ public class SocketIOManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.unityLogger.logEnabled = false;
         HTTPManager.Logger = null;
         isLoaded = false;
     }
@@ -230,16 +233,24 @@ public class SocketIOManager : MonoBehaviour
         {
             case "InitData":
                 {
-                    Debug.Log(jsonObject);
                     initialData = myData.message.GameData;
                     initUIData = myData.message.UIData;
                     playerdata = myData.message.PlayerData;
                     bonusdata = myData.message.BonusData;
-                    List<string> InitialReels = ConvertListOfListsToStrings(initialData.Reel);
-                    List<string> LinesString = ConvertListListIntToListString(initialData.Lines);
-                    GambleLimit = myData.message.maxGambleBet;
-                    InitialReels = RemoveQuotes(InitialReels);
-                    PopulateSlotSocket(InitialReels, LinesString);
+                    if (!SetInit)
+                    {
+                        Debug.Log(jsonObject);
+                        List<string> InitialReels = ConvertListOfListsToStrings(initialData.Reel);
+                        List<string> LinesString = ConvertListListIntToListString(initialData.Lines);
+                        GambleLimit = myData.message.maxGambleBet;
+                        InitialReels = RemoveQuotes(InitialReels);
+                        PopulateSlotSocket(InitialReels, LinesString);
+                        SetInit = true;
+                    }
+                    else
+                    {
+                        RefreshUI();
+                    }
                     break;
                 }
             case "ResultData":
@@ -269,6 +280,11 @@ public class SocketIOManager : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    private void RefreshUI()
+    {
+        uiManager.InitialiseUIData(initUIData.AbtLogo.link, initUIData.AbtLogo.logoSprite, initUIData.ToULink, initUIData.PopLink, initUIData.paylines);
     }
 
     //private void PopulateSlotSocket(List<string> slotPop)
@@ -628,6 +644,7 @@ public class Symbol
     public object defaultAmount { get; set; }
     public object symbolsCount { get; set; }
     public object increaseValue { get; set; }
+    public object description { get; set; }
     public int freeSpin { get; set; }
 }
 

@@ -237,6 +237,7 @@ public class SocketIOManager : MonoBehaviour
                     initUIData = myData.message.UIData;
                     playerdata = myData.message.PlayerData;
                     bonusdata = myData.message.BonusData;
+                    GambleLimit = myData.message.maxGambleBet;
                     if (!SetInit)
                     {
                         Debug.Log(jsonObject);

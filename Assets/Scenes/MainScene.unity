@@ -4989,7 +4989,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDA0ZWZmNjczYzk4NWRjMDU0ZWNlNCIsInVzZXJuYW1lIjoiR3Vyc2ltYXIiLCJyb2xlIjoicGxheWVyIiwiaWF0IjoxNzI0OTI4MTM3LCJleHAiOjE3MjU1MzI5Mzd9.Z6aEHv4BxmPRhPY4ZCQd43-lIlmAktIu-UdYuEOApMk
+  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MjU1MjYxNDksImV4cCI6MTcyNjEzMDk0OX0.MlFDJATOos7ba2hhTd12-1ARd-ZatveBPVqq1jex4OE
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21026,8 +21026,8 @@ MonoBehaviour:
   bonus_game: {fileID: 929982823}
   slotManager: {fileID: 2046803210}
   raycastPanel: {fileID: 257213505}
-  gems: []
   _audioManager: {fileID: 7113384613047857503}
+  m_Score: {fileID: 9259607}
   gemValues: 
   currentBreakCount: 0
   maxBreakCount: 0

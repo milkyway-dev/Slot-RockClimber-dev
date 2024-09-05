@@ -122,6 +122,7 @@ public class SlotBehaviour : MonoBehaviour
     internal bool CheckPopups = false;
     private int BetCounter = 0;
     private double currentBalance = 0;
+    internal double currentBet = 0;
     private double currentTotalBet = 0;
 
 
@@ -387,6 +388,8 @@ public class SlotBehaviour : MonoBehaviour
     {
         gambleController.GambleTweeningAnim(false);
         TriggerWinImageAnimation(false);
+        currentBet = SocketManager.initialData.Bets[BetCounter];
+
         if (currentBalance < currentTotalBet && !IsFreeSpin)
         {
             CompareBalance();
@@ -575,7 +578,10 @@ public class SlotBehaviour : MonoBehaviour
         {
             TempList[i].StopAnimation();
             if (TempList[i].transform.parent.childCount > 0)
+            {
+                TempList[i].transform.parent.GetChild(0).gameObject.SetActive(false);
                 TempList[i].transform.parent.GetChild(1).gameObject.SetActive(false);
+            }
         }
         TempList.Clear();
         TempList.TrimExcess();

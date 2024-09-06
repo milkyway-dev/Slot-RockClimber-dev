@@ -24,13 +24,19 @@ public class BonusBreakGem : MonoBehaviour
     {
         if (bonusController.currentBreakCount < bonusController.maxBreakCount)
         {
+            //HACK: Activating RayCast Panel
             bonusController.raycastPanel.SetActive(true);
             valueText.gameObject.SetActive(true);
 
+            //HACK: Stop the current playing animation and turn off the interaction after click
             imageAnimation.StopAnimation();
             imageAnimation.doLoopAnimation = false;
             gem.interactable = false;
+
+            //HACK: Assigning the new animation list to the texture array.
             imageAnimation.textureArray = breakAnimation;
+
+            //HACK: Starting the new game animation.
             imageAnimation.StartAnimation();
             value = bonusController.OnBreakGem();
 

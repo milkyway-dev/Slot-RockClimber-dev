@@ -10,19 +10,25 @@ public class BonusController : MonoBehaviour
     [SerializeField] private GameObject bonus_game;
     [SerializeField] private SlotBehaviour slotManager;
     [SerializeField] internal GameObject raycastPanel;
-    [SerializeField] private List<BonusBreakGem> gems;
+    //[SerializeField] private List<BonusBreakGem> gems;
     [SerializeField] private AudioController _audioManager;
-
+    [SerializeField] private TMP_Text m_Score;
     [SerializeField] private List<int> gemValues;
 
     [SerializeField] internal int currentBreakCount = 0;
     [SerializeField] internal int maxBreakCount = 0;
+
+    private double TotalBonusWin = 0;
  
 
     internal double OnBreakGem()
     {
         currentBreakCount++;
-        return gemValues[currentBreakCount - 1];
+        double m_value = gemValues[currentBreakCount - 1] * slotManager.currentBet;
+        TotalBonusWin += m_value;
+        Debug.Log(string.Concat("<color=cyan><b>", slotManager.currentBet, m_value, "</b></color>"));
+        m_Score.text = TotalBonusWin.ToString();
+        return m_value;
     }
 
     internal void GameOver()
@@ -45,16 +51,6 @@ public class BonusController : MonoBehaviour
         gemValues.Clear();
         gemValues.TrimExcess();
         gemValues = values;
-
-        for (int i = 0; i < gemValues.Count; i++)
-        {
-            if (gemValues[i] == -1)
-            {
-                gemValues.RemoveAt(i);
-                gemValues.Add(-1);
-            }
-        }
-
         _audioManager.SwitchBGSound(true);
         if (bonus_game) bonus_game.SetActive(true);
     }

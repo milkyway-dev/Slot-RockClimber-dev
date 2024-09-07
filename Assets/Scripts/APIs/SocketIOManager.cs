@@ -13,9 +13,13 @@ using Best.SocketIO.Events;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Linq;
 using Best.HTTP.Shared;
+using System.Runtime.InteropServices;
 
 public class SocketIOManager : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void delayHideLoadingScreen();
+
     [SerializeField]
     private SlotBehaviour slotManager;
 
@@ -332,6 +336,9 @@ public class SocketIOManager : MonoBehaviour
         slotManager.SetInitialUI();
 
         isLoaded = true;
+#if UNITY_WEBGL && !UNITY_EDITOR
+        delayHideLoadingScreen();
+#endif
     }
 
     internal void CloseSocket()

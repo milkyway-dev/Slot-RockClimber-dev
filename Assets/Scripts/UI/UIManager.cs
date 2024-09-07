@@ -139,11 +139,11 @@ public class UIManager : MonoBehaviour
 
     private bool isExit = false;
 
-    private void Awake()
-    {
-        if (Loading_Object) Loading_Object.SetActive(true);
-        StartCoroutine(LoadingRoutine());
-    }
+    //private void Awake()
+    //{
+    //    if (Loading_Object) Loading_Object.SetActive(true);
+    //    StartCoroutine(LoadingRoutine());
+    //}
 
     private IEnumerator LoadingRoutine()
     {

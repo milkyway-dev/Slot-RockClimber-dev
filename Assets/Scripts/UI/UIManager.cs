@@ -349,12 +349,12 @@ public class UIManager : MonoBehaviour
         if (Paytable_Object) Paytable_Object.SetActive(true);
         if (Settings_Object) Settings_Object.SetActive(true);
 
-        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x - 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x + 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Paytable_RT);
         });
 
-        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x - 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x + 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_RT);
         });
@@ -363,12 +363,12 @@ public class UIManager : MonoBehaviour
     private void CloseMenu()
     {
         if (audioController) audioController.PlayButtonAudio();
-        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x + 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x - 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Paytable_RT);
         });
 
-        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x + 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x - 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_RT);
         });

@@ -137,6 +137,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private SocketIOManager socketManager;
 
+    [SerializeField] Button m_AwakeGameButton;
     private bool isExit = false;
 
     //private void Awake()
@@ -144,6 +145,11 @@ public class UIManager : MonoBehaviour
     //    if (Loading_Object) Loading_Object.SetActive(true);
     //    StartCoroutine(LoadingRoutine());
     //}
+
+    private void Awake()
+    {
+        SimulateClickByDefault();
+    }
 
     private IEnumerator LoadingRoutine()
     {
@@ -233,6 +239,15 @@ public class UIManager : MonoBehaviour
         if (Left_Button) Left_Button.onClick.RemoveAllListeners();
         if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); });
 
+    }
+
+    //HACK: Something To Do Here
+    private void SimulateClickByDefault()
+    {
+
+        Debug.Log("Awaken The Game...");
+        m_AwakeGameButton.onClick.AddListener(() => { Debug.Log("Called The Game..."); });
+        m_AwakeGameButton.onClick.Invoke();
     }
 
     internal void LowBalPopup()

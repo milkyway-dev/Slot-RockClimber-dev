@@ -137,12 +137,18 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private SocketIOManager socketManager;
 
+    [SerializeField] Button m_AwakeGameButton;
     private bool isExit = false;
+
+    //private void Awake()
+    //{
+    //    if (Loading_Object) Loading_Object.SetActive(true);
+    //    StartCoroutine(LoadingRoutine());
+    //}
 
     private void Awake()
     {
-        if (Loading_Object) Loading_Object.SetActive(true);
-        StartCoroutine(LoadingRoutine());
+        SimulateClickByDefault();
     }
 
     private IEnumerator LoadingRoutine()
@@ -210,10 +216,10 @@ public class UIManager : MonoBehaviour
         if (GameExit_Button) GameExit_Button.onClick.AddListener(delegate { OpenPopup(QuitPopup_Object); });
 
         if (NoQuit_Button) NoQuit_Button.onClick.RemoveAllListeners();
-        if (NoQuit_Button) NoQuit_Button.onClick.AddListener(delegate { ClosePopup(QuitPopup_Object); });
+        if (NoQuit_Button) NoQuit_Button.onClick.AddListener(delegate { if(!isExit) ClosePopup(QuitPopup_Object); });
 
         if (CrossQuit_Button) CrossQuit_Button.onClick.RemoveAllListeners();
-        if (CrossQuit_Button) CrossQuit_Button.onClick.AddListener(delegate { ClosePopup(QuitPopup_Object); });
+        if (CrossQuit_Button) CrossQuit_Button.onClick.AddListener(delegate { if(!isExit) ClosePopup(QuitPopup_Object); });
 
         if (LBExit_Button) LBExit_Button.onClick.RemoveAllListeners();
         if (LBExit_Button) LBExit_Button.onClick.AddListener(delegate { ClosePopup(LBPopup_Object); });
@@ -233,6 +239,15 @@ public class UIManager : MonoBehaviour
         if (Left_Button) Left_Button.onClick.RemoveAllListeners();
         if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); });
 
+    }
+
+    //HACK: Something To Do Here
+    private void SimulateClickByDefault()
+    {
+
+        Debug.Log("Awaken The Game...");
+        m_AwakeGameButton.onClick.AddListener(() => { Debug.Log("Called The Game..."); });
+        m_AwakeGameButton.onClick.Invoke();
     }
 
     internal void LowBalPopup()
@@ -304,7 +319,7 @@ public class UIManager : MonoBehaviour
         isExit = true;
         audioController.PlayButtonAudio();
         slotBehaviour.CallCloseSocket();
-        Application.ExternalCall("window.parent.postMessage", "onExit", "*");
+        //Application.ExternalCall("window.parent.postMessage", "onExit", "*");
     }
 
     internal void PopulateWin(int type, double amount)
@@ -349,12 +364,12 @@ public class UIManager : MonoBehaviour
         if (Paytable_Object) Paytable_Object.SetActive(true);
         if (Settings_Object) Settings_Object.SetActive(true);
 
-        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x - 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x + 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Paytable_RT);
         });
 
-        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x - 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x + 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_RT);
         });
@@ -363,12 +378,12 @@ public class UIManager : MonoBehaviour
     private void CloseMenu()
     {
         if (audioController) audioController.PlayButtonAudio();
-        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x + 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Paytable_RT.anchoredPosition, (val) => Paytable_RT.anchoredPosition = val, new Vector2(Paytable_RT.anchoredPosition.x - 150, Paytable_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Paytable_RT);
         });
 
-        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x + 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
+        DOTween.To(() => Settings_RT.anchoredPosition, (val) => Settings_RT.anchoredPosition = val, new Vector2(Settings_RT.anchoredPosition.x - 300, Settings_RT.anchoredPosition.y), 0.1f).OnUpdate(() =>
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_RT);
         });

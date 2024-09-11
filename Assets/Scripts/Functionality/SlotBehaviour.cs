@@ -119,9 +119,11 @@ public class SlotBehaviour : MonoBehaviour
     private bool IsAutoSpin = false;
     private bool IsFreeSpin = false;
     private bool IsSpinning = false;
+    private bool CheckSpinAudio = false;
     internal bool CheckPopups = false;
     private int BetCounter = 0;
     private double currentBalance = 0;
+    internal double currentBet = 0;
     private double currentTotalBet = 0;
 
 
@@ -348,13 +350,7 @@ public class SlotBehaviour : MonoBehaviour
 
     private void OnApplicationFocus(bool focus)
     {
-        if (focus)
-        {
-            if (!IsSpinning)
-            {
-                if (audioController) audioController.StopWLAaudio();
-            }
-        }
+        audioController.CheckFocusFunction(focus, CheckSpinAudio);
     }
 
     private void StartSlots(bool autoSpin = false)
@@ -387,6 +383,8 @@ public class SlotBehaviour : MonoBehaviour
     {
         gambleController.GambleTweeningAnim(false);
         TriggerWinImageAnimation(false);
+        currentBet = SocketManager.initialData.Bets[BetCounter];
+
         if (currentBalance < currentTotalBet && !IsFreeSpin)
         {
             CompareBalance();
@@ -395,6 +393,7 @@ public class SlotBehaviour : MonoBehaviour
             yield break;
         }
         if (audioController) audioController.PlayWLAudio("spin");
+        CheckSpinAudio = true;
         IsSpinning = true;
         ToggleButtonGrp(false);
         for (int i = 0; i < numberOfSlots; i++)
@@ -575,7 +574,10 @@ public class SlotBehaviour : MonoBehaviour
         {
             TempList[i].StopAnimation();
             if (TempList[i].transform.parent.childCount > 0)
+            {
+                TempList[i].transform.parent.GetChild(0).gameObject.SetActive(false);
                 TempList[i].transform.parent.GetChild(1).gameObject.SetActive(false);
+            }
         }
         TempList.Clear();
         TempList.TrimExcess();
@@ -638,7 +640,7 @@ public class SlotBehaviour : MonoBehaviour
             if (audioController) audioController.StopWLAaudio();
         }
 
-
+        CheckSpinAudio = false;
     }
 
     private void GenerateMatrix(int value)

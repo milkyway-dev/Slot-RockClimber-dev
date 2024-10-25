@@ -4990,7 +4990,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MjU1MjYxNDksImV4cCI6MTcyNjEzMDk0OX0.MlFDJATOos7ba2hhTd12-1ARd-ZatveBPVqq1jex4OE
+  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3Mjk4NTAyMTksImV4cCI6MTczMDQ1NTAxOX0.K4nXar-ETzIuS4Pyo2p4xGe4z7CzweK81NUtLiaEjI8
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0

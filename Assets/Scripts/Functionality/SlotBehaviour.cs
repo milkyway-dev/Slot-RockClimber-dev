@@ -457,6 +457,7 @@ public class SlotBehaviour : MonoBehaviour
 
         CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
         KillAllTweens();
+        currentBalance = SocketManager.playerdata.Balance;
 
         CheckPopups = true;
 

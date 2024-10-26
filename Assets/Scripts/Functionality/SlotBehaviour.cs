@@ -265,14 +265,14 @@ public class SlotBehaviour : MonoBehaviour
         if (currentBalance < currentTotalBet)
         {
             uiManager.LowBalPopup();
-            if (AutoSpin_Button) AutoSpin_Button.interactable = false;
-            if (SlotStart_Button) SlotStart_Button.interactable = false;
+            //if (AutoSpin_Button) AutoSpin_Button.interactable = false;
+            //if (SlotStart_Button) SlotStart_Button.interactable = false;
         }
-        else
-        {
-            if (AutoSpin_Button) AutoSpin_Button.interactable = true;
-            if (SlotStart_Button) SlotStart_Button.interactable = true;
-        }
+        //else
+        //{
+        //    if (AutoSpin_Button) AutoSpin_Button.interactable = true;
+        //    if (SlotStart_Button) SlotStart_Button.interactable = true;
+        //}
     }
 
     private void MaxBet()
@@ -390,6 +390,7 @@ public class SlotBehaviour : MonoBehaviour
             CompareBalance();
             StopAutoSpin();
             yield return new WaitForSeconds(1);
+            ToggleButtonGrp(true);
             yield break;
         }
         if (audioController) audioController.PlayWLAudio("spin");
@@ -457,6 +458,7 @@ public class SlotBehaviour : MonoBehaviour
 
         CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
         KillAllTweens();
+        currentBalance = SocketManager.playerdata.Balance;
 
         CheckPopups = true;
 

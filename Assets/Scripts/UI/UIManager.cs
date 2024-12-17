@@ -63,12 +63,16 @@ public class UIManager : MonoBehaviour
     private Button PaytableExit_Button;
     [SerializeField]
     private TMP_Text[] SymbolsText;
+
+    [SerializeField]
+    private TMP_Text wildText;
+
+    [SerializeField]
+    private TMP_Text m_Bonus_Text;
     [SerializeField]
     private Button Right_Button;
     [SerializeField]
     private Button Left_Button;
-    [SerializeField]
-    private TMP_Text m_Bonus_Text;
     [SerializeField]
     private GameObject[] Info_Screens;
     int screenCounter = 0;
@@ -87,8 +91,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject megawin;
     [SerializeField] private TMP_Text megawin_text;
     [SerializeField] private Image Win_Image;
-    [SerializeField] private Sprite HugeWin_Sprite; 
-    [SerializeField] private Sprite BigWin_Sprite; 
+    [SerializeField] private Sprite HugeWin_Sprite;
+    [SerializeField] private Sprite BigWin_Sprite;
     [SerializeField] private Sprite MegaWin_Sprite;
 
     [Header("Splash Screen")]
@@ -216,10 +220,10 @@ public class UIManager : MonoBehaviour
         if (GameExit_Button) GameExit_Button.onClick.AddListener(delegate { OpenPopup(QuitPopup_Object); });
 
         if (NoQuit_Button) NoQuit_Button.onClick.RemoveAllListeners();
-        if (NoQuit_Button) NoQuit_Button.onClick.AddListener(delegate { if(!isExit) ClosePopup(QuitPopup_Object); });
+        if (NoQuit_Button) NoQuit_Button.onClick.AddListener(delegate { if (!isExit) ClosePopup(QuitPopup_Object); });
 
         if (CrossQuit_Button) CrossQuit_Button.onClick.RemoveAllListeners();
-        if (CrossQuit_Button) CrossQuit_Button.onClick.AddListener(delegate { if(!isExit) ClosePopup(QuitPopup_Object); });
+        if (CrossQuit_Button) CrossQuit_Button.onClick.AddListener(delegate { if (!isExit) ClosePopup(QuitPopup_Object); });
 
         if (LBExit_Button) LBExit_Button.onClick.RemoveAllListeners();
         if (LBExit_Button) LBExit_Button.onClick.AddListener(delegate { ClosePopup(LBPopup_Object); });
@@ -276,7 +280,8 @@ public class UIManager : MonoBehaviour
         //}
     }
 
-    void ReturnToHome() {
+    void ReturnToHome()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -310,6 +315,12 @@ public class UIManager : MonoBehaviour
             {
                 if (m_Bonus_Text) m_Bonus_Text.text = paylines.symbols[i].description.ToString();
             }
+            if (paylines.symbols[i].Name.ToUpper() == "WILD")
+            {
+
+                if (wildText) wildText.text = paylines.symbols[i].description.ToString();
+            }
+
         }
     }
 
@@ -326,7 +337,7 @@ public class UIManager : MonoBehaviour
     {
         double initAmount = 0;
         double originalAmount = amount;
-        switch(type)
+        switch (type)
         {
             case 1:
                 if (Win_Image) Win_Image.sprite = BigWin_Sprite;
@@ -350,7 +361,7 @@ public class UIManager : MonoBehaviour
         {
             if (MainPopup_Object) MainPopup_Object.SetActive(false);
             if (megawin) megawin.SetActive(false);
-            if (megawin_text) megawin_text.text="0";
+            if (megawin_text) megawin_text.text = "0";
             slotBehaviour.CheckPopups = false;
 
         });
@@ -399,14 +410,14 @@ public class UIManager : MonoBehaviour
 
     private void OpenPopup(GameObject Popup)
     {
-        if (audioController)audioController.PlayButtonAudio();
+        if (audioController) audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
     }
 
     private void ClosePopup(GameObject Popup)
     {
-        if (audioController)audioController.PlayButtonAudio();
+        if (audioController) audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(false);
         if (!DisconnectPopup_Object.activeSelf)
         {

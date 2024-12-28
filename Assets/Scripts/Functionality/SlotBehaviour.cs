@@ -183,7 +183,7 @@ public class SlotBehaviour : MonoBehaviour
         }
     }
 
-    private void AutoSpin()
+    internal void AutoSpin()
     {
         if (audioController) audioController.PlaySpinButtonAudio();
         if (!IsAutoSpin)
@@ -233,7 +233,6 @@ public class SlotBehaviour : MonoBehaviour
         if (IsAutoSpin)
         {
             IsAutoSpin = false;
-            WasAutoSpinOn = false;
             if (AutoSpinStop_Button) AutoSpinStop_Button.gameObject.SetActive(false);
             if (AutoSpin_Button) AutoSpin_Button.gameObject.SetActive(true);
             StartCoroutine(StopAutoSpinCoroutine());
@@ -563,7 +562,7 @@ public class SlotBehaviour : MonoBehaviour
         }
         else
         {
-            //ActivateGamble();
+            ActivateGamble();
             yield return new WaitForSeconds(2f);
             IsSpinning = false;
         }
@@ -604,7 +603,10 @@ public class SlotBehaviour : MonoBehaviour
 
     internal void DeactivateGamble()
     {
-        StopAutoSpin();
+        if (IsAutoSpin)
+        {
+            StopAutoSpin();
+        }
     }
 
     internal void GambleCollect()

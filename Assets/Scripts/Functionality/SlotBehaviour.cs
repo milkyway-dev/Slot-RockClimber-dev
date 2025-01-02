@@ -120,6 +120,7 @@ public class SlotBehaviour : MonoBehaviour
 
     //Tweeners
     private Tweener Win_Tween = null;
+    private Tween BalanceTween;
 
     protected int Lines = 9;
 
@@ -480,9 +481,13 @@ public class SlotBehaviour : MonoBehaviour
 
             balance = balance - bet;
 
-            DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
+            //DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
+            //{
+            //    if (Balance_text) Balance_text.text = initAmount.ToString("f3");
+            //});
+            BalanceTween = DOTween.To(() => initAmount, (val) => initAmount = val, balance, 0.8f).OnUpdate(() =>
             {
-                if (Balance_text) Balance_text.text = initAmount.ToString("f3");
+                if (Balance_text) Balance_text.text = initAmount.ToString("F3");
             });
         }
         SocketManager.AccumulateResult(BetCounter);
@@ -541,6 +546,8 @@ public class SlotBehaviour : MonoBehaviour
         currentBalance = SocketManager.playerdata.Balance;
 
         CheckPopups = true;
+
+        BalanceTween?.Kill();
 
         if (TotalWin_text) TotalWin_text.text = SocketManager.playerdata.currentWining.ToString("f3");
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f3");

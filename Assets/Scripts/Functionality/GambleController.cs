@@ -57,6 +57,7 @@ public class GambleController : MonoBehaviour
 
     internal bool gambleStart = false;
     internal bool isResult = false;
+    [SerializeField] private bool isAutoSpinOn;
 
     private void Start()
     {
@@ -78,6 +79,11 @@ public class GambleController : MonoBehaviour
     private void OnReset()
     {
         if (slotController) slotController.GambleCollect();
+        if (isAutoSpinOn)
+        {
+            isAutoSpinOn = false;
+            slotController.AutoSpin();
+        }
         NormalCollectFunction();
     }
 
@@ -89,6 +95,7 @@ public class GambleController : MonoBehaviour
         if (!isRepeat)
         {
             winamount.text = "0";
+            isAutoSpinOn = true;
         }
         if (audioController) audioController.PlayButtonAudio();
         if (gamble_game) gamble_game.SetActive(true);
@@ -325,7 +332,10 @@ public class GambleController : MonoBehaviour
         DealerCard_Script.Card_Button.image.sprite = cardCover;
         DealerCard_Script.once = false;
         toggleDoubleButton(false);
-
+        if (isAutoSpinOn)
+        {
+            slotController.AutoSpin();
+        }
     }
 
     private void NormalCollectFunction()
@@ -342,7 +352,6 @@ public class GambleController : MonoBehaviour
         DealerCard_Script.Card_Button.image.sprite = cardCover;
         DealerCard_Script.once = false;
         toggleDoubleButton(false);
-
     }
 
     void OnGameOver()

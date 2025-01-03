@@ -4479,7 +4479,7 @@ MonoBehaviour:
   Paytable_Object: {fileID: 796307136}
   Paytable_RT: {fileID: 796307137}
   GameExit_Button: {fileID: 672233073}
-  SkipWinAnimation: {fileID: 0}
+  SkipWinAnimation: {fileID: 927980918}
   MainPopup_Object: {fileID: 1643718612}
   AboutPopup_Object: {fileID: 1334341302}
   AboutExit_Button: {fileID: 1501538279}
@@ -5532,7 +5532,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MzQ5MjY0NDYsImV4cCI6MTczNTUzMTI0Nn0.uzwo-26jsQxk764UY7H7hwHEodU5F1hcQaalyvu6Zjs
+  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MzU4ODA1NzEsImV4cCI6MTczNjQ4NTM3MX0.TQBCA6aumAo0oQ5OcH3qycmlh-JKUzF7RnPiAWSnXcw
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10552,6 +10552,8 @@ GameObject:
   m_Component:
   - component: {fileID: 927980917}
   - component: {fileID: 927980918}
+  - component: {fileID: 927980920}
+  - component: {fileID: 927980919}
   m_Layer: 5
   m_Name: MegaWinPopup
   m_TagString: Untagged
@@ -10619,10 +10621,48 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 927980919}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &927980919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927980916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &927980920
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927980916}
+  m_CullTransparentMesh: 1
 --- !u!1 &929982823
 GameObject:
   m_ObjectHideFlags: 0

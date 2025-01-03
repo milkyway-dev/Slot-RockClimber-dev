@@ -252,7 +252,7 @@ public class UIManager : MonoBehaviour
         if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); });
 
         if (SkipWinAnimation) SkipWinAnimation.onClick.RemoveAllListeners();
-        if (SkipWinAnimation) SkipWinAnimation.onClick.AddListener(SkipWin);
+        if (SkipWinAnimation) SkipWinAnimation.onClick.AddListener(delegate { SkipWin(); Debug.Log("Clicked.."); });
 
     }
 

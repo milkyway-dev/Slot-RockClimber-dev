@@ -511,7 +511,7 @@ public class SlotBehaviour : MonoBehaviour
         }
         else
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 yield return new WaitForSeconds(0.1f);
                 if (StopSpinToggle)

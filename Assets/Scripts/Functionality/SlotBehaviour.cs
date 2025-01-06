@@ -570,7 +570,7 @@ public class SlotBehaviour : MonoBehaviour
         else
         {
             ActivateGamble();
-            yield return new WaitForSeconds(2f);
+            //yield return new WaitForSeconds(2f);
             IsSpinning = false;
         }
         //if (SocketManager.resultData.freeSpins > 0  && !IsFreeSpin)

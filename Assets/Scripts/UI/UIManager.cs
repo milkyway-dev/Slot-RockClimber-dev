@@ -246,10 +246,10 @@ public class UIManager : MonoBehaviour
         if (CloseAD_Button) CloseAD_Button.onClick.AddListener(CallOnExitFunction);
 
         if (Right_Button) Right_Button.onClick.RemoveAllListeners();
-        if (Right_Button) Right_Button.onClick.AddListener(delegate { ChangePage(true); });
+        if (Right_Button) Right_Button.onClick.AddListener(delegate { ChangePage(true); audioController.PlayButtonAudio(); });
 
         if (Left_Button) Left_Button.onClick.RemoveAllListeners();
-        if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); });
+        if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); audioController.PlayButtonAudio(); });
 
         if (SkipWinAnimation) SkipWinAnimation.onClick.RemoveAllListeners();
         if (SkipWinAnimation) SkipWinAnimation.onClick.AddListener(delegate { SkipWin(); Debug.Log("Clicked.."); });

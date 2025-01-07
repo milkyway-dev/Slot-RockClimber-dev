@@ -104,13 +104,13 @@ public class GambleController : MonoBehaviour
     {
         if (GambleEnd_Object) GambleEnd_Object.SetActive(false);
         GambleTweeningAnim(false);
-        isAutoSpinOn = slotController.IsAutoSpin;
-        slotController.DeactivateGamble();
         if (!isRepeat)
         {
             winamount.text = "0";
             //isAutoSpinOn = true;
+            isAutoSpinOn = slotController.IsAutoSpin;
         }
+        slotController.DeactivateGamble();
         if (audioController) audioController.PlayButtonAudio();
         if (gamble_game) gamble_game.SetActive(true);
         loadingScreen.SetActive(true);

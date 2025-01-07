@@ -63,11 +63,24 @@ public class GambleController : MonoBehaviour
     {
         if (GambleEnd_Object) GambleEnd_Object.SetActive(false);
         if (doubleButton) doubleButton.onClick.RemoveAllListeners();
-        if (doubleButton) doubleButton.onClick.AddListener(delegate { StartGamblegame(); });
+        if (doubleButton) doubleButton.onClick.AddListener(delegate
+        {
+            audioController.PlayButtonAudio();
+            StartGamblegame();
+        });
         if (DoubleEnd_Button) DoubleEnd_Button.onClick.RemoveAllListeners();
-        if (DoubleEnd_Button) DoubleEnd_Button.onClick.AddListener(delegate { NormalCollectFunction(); StartGamblegame(true); });
+        if (DoubleEnd_Button) DoubleEnd_Button.onClick.AddListener(delegate
+        {
+            audioController.PlayButtonAudio();
+            NormalCollectFunction();
+            StartGamblegame(true);
+        });
         if (CollectEnd_Button) CollectEnd_Button.onClick.RemoveAllListeners();
-        if (CollectEnd_Button) CollectEnd_Button.onClick.AddListener(OnReset);
+        if (CollectEnd_Button) CollectEnd_Button.onClick.AddListener(() =>
+        {
+            audioController.PlayButtonAudio();
+            OnReset();
+        });
         toggleDoubleButton(false);
     }
 
@@ -91,11 +104,12 @@ public class GambleController : MonoBehaviour
     {
         if (GambleEnd_Object) GambleEnd_Object.SetActive(false);
         GambleTweeningAnim(false);
+        isAutoSpinOn = slotController.IsAutoSpin;
         slotController.DeactivateGamble();
         if (!isRepeat)
         {
             winamount.text = "0";
-            isAutoSpinOn = true;
+            //isAutoSpinOn = true;
         }
         if (audioController) audioController.PlayButtonAudio();
         if (gamble_game) gamble_game.SetActive(true);

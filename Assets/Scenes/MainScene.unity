@@ -780,7 +780,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: double
+  m_text: gamble
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3558ebb49d57e4533951e62052a7b2a6, type: 2}
   m_sharedMaterial: {fileID: 2081304394988236903, guid: 3558ebb49d57e4533951e62052a7b2a6, type: 2}
@@ -5532,7 +5532,7 @@ MonoBehaviour:
   uiManager: {fileID: 377874625}
   bonusdata: []
   _jsManager: {fileID: 500036493}
-  testToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZDgzZDdkYTI3YmY5MDI0NDNlYjRkZSIsInVzZXJuYW1lIjoiZGFyc2hhbiIsInJvbGUiOiJwbGF5ZXIiLCJpYXQiOjE3MzU4ODA1NzEsImV4cCI6MTczNjQ4NTM3MX0.TQBCA6aumAo0oQ5OcH3qycmlh-JKUzF7RnPiAWSnXcw
+  testToken: 
 --- !u!114 &500036493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17669,9 +17669,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 1769313722, guid: 6b662e0f1843c4c898feb8f34b8c1355, type: 3}
+    m_PressedSprite: {fileID: 22898558, guid: c7b7bce91fd794fd5a9ea9a8bc001065, type: 3}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 1769313722, guid: 6b662e0f1843c4c898feb8f34b8c1355, type: 3}
+    m_DisabledSprite: {fileID: 22898558, guid: c7b7bce91fd794fd5a9ea9a8bc001065, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -17703,7 +17703,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1906813594, guid: 3ae5745695f9941259c38ad3e109e2b0, type: 3}
+  m_Sprite: {fileID: -1145497530, guid: c7b7bce91fd794fd5a9ea9a8bc001065, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

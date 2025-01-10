@@ -44,6 +44,9 @@ public class UIManager : MonoBehaviour
     private RectTransform Paytable_RT;
     [SerializeField]
     private Button GameExit_Button;
+    [SerializeField]
+    private Button SkipWinAnimation;
+
     [Header("Popus UI")]
     [SerializeField]
     private GameObject MainPopup_Object;
@@ -144,6 +147,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] Button m_AwakeGameButton;
     private bool isExit = false;
 
+    internal int FreeSpins;
+
+    private Tween WinPopupTextTween;
+    private Tween ClosePopupTween;
+
     //private void Awake()
     //{
     //    if (Loading_Object) Loading_Object.SetActive(true);
@@ -238,10 +246,13 @@ public class UIManager : MonoBehaviour
         if (CloseAD_Button) CloseAD_Button.onClick.AddListener(CallOnExitFunction);
 
         if (Right_Button) Right_Button.onClick.RemoveAllListeners();
-        if (Right_Button) Right_Button.onClick.AddListener(delegate { ChangePage(true); });
+        if (Right_Button) Right_Button.onClick.AddListener(delegate { ChangePage(true); audioController.PlayButtonAudio(); });
 
         if (Left_Button) Left_Button.onClick.RemoveAllListeners();
-        if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); });
+        if (Left_Button) Left_Button.onClick.AddListener(delegate { ChangePage(false); audioController.PlayButtonAudio(); });
+
+        if (SkipWinAnimation) SkipWinAnimation.onClick.RemoveAllListeners();
+        if (SkipWinAnimation) SkipWinAnimation.onClick.AddListener(delegate { SkipWin(); Debug.Log("Clicked.."); });
 
     }
 
@@ -252,6 +263,23 @@ public class UIManager : MonoBehaviour
         Debug.Log("Awaken The Game...");
         m_AwakeGameButton.onClick.AddListener(() => { Debug.Log("Called The Game..."); });
         m_AwakeGameButton.onClick.Invoke();
+    }
+
+    void SkipWin()
+    {
+        Debug.Log("Skip win called");
+        if (ClosePopupTween != null)
+        {
+            ClosePopupTween.Kill();
+            ClosePopupTween = null;
+        }
+        if (WinPopupTextTween != null)
+        {
+            WinPopupTextTween.Kill();
+            WinPopupTextTween = null;
+        }
+        ClosePopup(megawin);
+        slotBehaviour.CheckPopups = false;
     }
 
     internal void LowBalPopup()
@@ -297,15 +325,15 @@ public class UIManager : MonoBehaviour
             string text = null;
             if (paylines.symbols[i].Multiplier[0][0] != 0)
             {
-                text += "5x - " + paylines.symbols[i].Multiplier[0][0];
+                text += "5x - " + paylines.symbols[i].Multiplier[0][0] + "x";
             }
             if (paylines.symbols[i].Multiplier[1][0] != 0)
             {
-                text += "\n4x - " + paylines.symbols[i].Multiplier[1][0];
+                text += "\n4x - " + paylines.symbols[i].Multiplier[1][0] + "x";
             }
             if (paylines.symbols[i].Multiplier[2][0] != 0)
             {
-                text += "\n3x - " + paylines.symbols[i].Multiplier[2][0];
+                text += "\n3x - " + paylines.symbols[i].Multiplier[2][0] + "x";
             }
             if (SymbolsText[i]) SymbolsText[i].text = text;
         }
@@ -352,12 +380,12 @@ public class UIManager : MonoBehaviour
         if (megawin) megawin.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
 
-        DOTween.To(() => initAmount, (val) => initAmount = val, amount, 1f).OnUpdate(() =>
+        WinPopupTextTween = DOTween.To(() => initAmount, (val) => initAmount = val, amount, 5f).OnUpdate(() =>
         {
-            if (megawin_text) megawin_text.text = initAmount.ToString("f2");
+            if (megawin_text) megawin_text.text = initAmount.ToString("f3");
         });
 
-        DOVirtual.DelayedCall(3.5f, () =>
+        ClosePopupTween = DOVirtual.DelayedCall(6f, () =>
         {
             if (MainPopup_Object) MainPopup_Object.SetActive(false);
             if (megawin) megawin.SetActive(false);

@@ -37,7 +37,7 @@ public class SocketIOManager : MonoBehaviour
 
     protected string SocketURI = null;
     // protected string TestSocketURI = "https://game-crm-rtp-backend.onrender.com/";
-    protected string TestSocketURI = "http://localhost:5000";
+    protected string TestSocketURI = "http://localhost:5001";
     // protected string nameSpace="game"; //BackendChanges
     protected string nameSpace = ""; //BackendChanges
     private Socket gameSocket; //BackendChanges
@@ -90,7 +90,7 @@ public class SocketIOManager : MonoBehaviour
         options.Reconnection = true;
         options.ConnectWith = Best.SocketIO.Transports.TransportTypes.WebSocket; //BackendChanges
 
-        Application.ExternalCall("window.parent.postMessage", "authToken", "*");
+        //Application.ExternalCall("window.parent.postMessage", "authToken", "*");
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         JSManager.SendCustomMessage("authToken");
@@ -379,7 +379,7 @@ public class SocketIOManager : MonoBehaviour
     private void SendDataWithNamespace(string eventName, string json = null)
     {
         // Send the message
-        if (gameSocket != null && gameSocket.IsOpen) //BackendChanges
+        if (gameSocket != null && gameSocket.IsOpen)
         {
             if (json != null)
             {
